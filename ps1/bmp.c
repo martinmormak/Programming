@@ -14,12 +14,30 @@ char* reverse(const char* text){
     {
         return "NULL";
     }
+    for(long i=0;i<strlen(text);i++)
+    {
+        if(text[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(text)-1)
+        {
+            return "NULL";
+        }
+    }
     char *rever = calloc(strlen(text)+1,sizeof *text);
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         rever[i]=text[strlen(text)-1-i];
     }
     rever[strlen(text)]='\0';
+    for(long i=0;i<strlen(rever);i++)
+    {
+        if (rever[i] >= 97 && rever[i] <= 122)
+        {
+            rever[i] = rever[i] - 32;
+        }
+    }
     return rever;
 }
 
@@ -28,15 +46,47 @@ char* vigenere_encrypt(const char* key, const char* text){
     {
         return "NULL";
     }
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]<97||key[i]>122)
+        {
+            if(key[i]<65||key[i]>90)
+            {
+                return NULL;
+            }
+        }
+    }
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(key)-1)
+        {
+            return "NULL";
+        }
+    }
+    for(long i=0;i<strlen(text);i++)
+    {
+        if(text[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(text)-1)
+        {
+            return "NULL";
+        }
+    }
     char ke[strlen(key)];
     char k[strlen(text)];
     char txt[strlen(text)];
     char *str = calloc(strlen(text)+1,sizeof *text);
-    int p=0;
-    int x=0;
-    int y=0;
+    long p=0;
+    long x=0;
+    long y=0;
     char letters[26]={"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if(text[i]<97 || text[i]>122)
         {
@@ -52,7 +102,7 @@ char* vigenere_encrypt(const char* key, const char* text){
             }
         }
     }
-    for(int i=0;i<strlen(key);i++)
+    for(long i=0;i<strlen(key);i++)
     {
         if (key[i] >= 97 && key[i] <= 122)
         {
@@ -73,7 +123,7 @@ char* vigenere_encrypt(const char* key, const char* text){
         printf("\n");
     }*/
     p=0;
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if (text[i] >= 97 && text[i] <= 122)
         {
@@ -85,7 +135,7 @@ char* vigenere_encrypt(const char* key, const char* text){
         }
     }
     txt[strlen(text)]='\0';
-    for(int i=0;i<strlen(txt);i++)
+    for(long i=0;i<strlen(txt);i++)
     {
         if(txt[i]>=65 && txt[i]<=90)
         {
@@ -130,11 +180,11 @@ char* vigenere_encrypt(const char* key, const char* text){
     {"YZABCDEFGHIJKLMNOPQRSTUVWX"},
     {"ZABCDEFGHIJKLMNOPQRSTUVWXY"}
     };
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if(txt[i]>=65&&txt[i]<=90)
         {
-            for(int q=0;q<26;q++)
+            for(long q=0;q<26;q++)
             {
                 if(letters[q]==txt[i])
                 {
@@ -162,15 +212,47 @@ char* vigenere_decrypt(const char* key, const char* text){
     {
         return "NULL";
     }
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]<97||key[i]>122)
+        {
+            if(key[i]<65||key[i]>90)
+            {
+                return NULL;
+            }
+        }
+    }
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(key)-1)
+        {
+            return "NULL";
+        }
+    }
+    for(long i=0;i<strlen(text);i++)
+    {
+        if(text[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(text)-1)
+        {
+            return "NULL";
+        }
+    }
     char ke[strlen(key)];
     char k[strlen(text)];
     char txt[strlen(text)];
     char *str = calloc(strlen(text)+1,sizeof *text);
-    int p=0;
-    int x=0;
-    int y=0;
+    long p=0;
+    long x=0;
+    long y=0;
     char letters[26]={"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if(text[i]<97 || text[i]>122)
         {
@@ -186,7 +268,7 @@ char* vigenere_decrypt(const char* key, const char* text){
             }
         }
     }
-    for(int i=0;i<strlen(key);i++)
+    for(long i=0;i<strlen(key);i++)
     {
         if (key[i] >= 97 && key[i] <= 122)
         {
@@ -207,7 +289,7 @@ char* vigenere_decrypt(const char* key, const char* text){
         printf("\n");
     }*/
     p=0;
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if (text[i] >= 97 && text[i] <= 122)
         {
@@ -219,7 +301,7 @@ char* vigenere_decrypt(const char* key, const char* text){
         }
     }
     txt[strlen(text)]='\0';
-    for(int i=0;i<strlen(txt);i++)
+    for(long i=0;i<strlen(txt);i++)
     {
         if(txt[i]>=65 && txt[i]<=90)
         {
@@ -264,11 +346,11 @@ char* vigenere_decrypt(const char* key, const char* text){
     {"YZABCDEFGHIJKLMNOPQRSTUVWX"},
     {"ZABCDEFGHIJKLMNOPQRSTUVWXY"}
     };
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if(txt[i]>=65&&txt[i]<=90)
         {
-            for(int q=0;q<26;q++)
+            for(long q=0;q<26;q++)
             {
                 if(letters[q]==txt[i])
                 {
@@ -279,7 +361,7 @@ char* vigenere_decrypt(const char* key, const char* text){
                     x=q;
                 }
             }
-            for(int q=0;q<26;q++)
+            for(long q=0;q<26;q++)
             {
                 if(table[q][x]==txt[i])
                 {
@@ -304,10 +386,10 @@ unsigned char* bit_encrypt(const char* text){
     {
         return "NULL";
     }*/
-    int index=0;
+    long index=0;
     //char str[255];
     unsigned char *string = calloc(strlen(text)+1,sizeof *text);
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         int tmp;
         int bit[8]={0,0,0,0,0,0,0,0};
@@ -321,7 +403,7 @@ unsigned char* bit_encrypt(const char* text){
         tmp=bit[0];
         bit[0]=bit[1];
         bit[1]=tmp;
-
+        tmp=bit[2];
         bit[2]=bit[3];
         bit[3]=tmp;
         for(int x=0;x<4;x++)
@@ -346,44 +428,6 @@ unsigned char* bit_encrypt(const char* text){
         //printf("%d\n",a);
         string[index]=(unsigned char)a;
         index++;
-        /*int a=0;
-        int b=0;
-        for(int x=0;x<4;x++)
-        {
-            if(bit[3-x]==1)
-            {
-                a=a+pow(2,x);
-            }
-            if(bit[7-x]==1)
-            {
-                b=b+pow(2,x);
-            }
-        }
-        if(a<=9)
-        {
-            str[index]=48+a;
-        }
-        else
-        {
-            str[index]=65+a-10;
-        }
-        index++;
-        if(b<=9)
-        {
-            str[index]=48+b;
-        }
-        else
-        {
-            str[index]=65+b-10;
-        }
-        index++;*/
-        /*for(int x=0;x<8;x++)
-        {
-            printf("%d",bit[x]);
-        }*/
-        //printf("\n");
-        //str[index]='\0';
-        //printf("    -   %d\n",a);
     }
     //printf("%s\n",str);
     string[index]='\0';
@@ -401,14 +445,14 @@ char* bit_decrypt(const unsigned char* text){
     {
         return "NULL";
     }*/
-    int index=0;
+    long index=0;
     //char *txt = calloc(255,8);
     //txt=(char*)text;
     //char str[255];
     char *string = calloc(255,8);
     int num;
     //printf("%s\n",txt);
-    int i=0;
+    long i=0;
     while(text[i]!='\0')
     {
         int tmp;
@@ -472,11 +516,22 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
 {
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(key)-1)
+        {
+            return "NULL";
+        }
+    }
     char* reversed=bit_decrypt(text);
     printf("    %s\n",reversed);
     char* decrypted = vigenere_decrypt(key, reversed);
     printf("    %s\n",decrypted);
-    //free(reversed);
+    free(reversed);
     return reverse(decrypted);
 }
 

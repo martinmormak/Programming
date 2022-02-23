@@ -10,26 +10,48 @@ char* playfair_encrypt(const char* key, const char* text)
     {
         return "NULL";
     }
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(key)-1)
+        {
+            return "NULL";
+        }
+    }
+    for(long i=0;i<strlen(text);i++)
+    {
+        if(text[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(text)-1)
+        {
+            return "NULL";
+        }
+    }
     char diagram[5][5];
-    int x=0;
-    int y=0;
-    int m=0;
-    int c=0;
-    int xa=0;
-    int ya=0;
-    int xb=0;
-    int yb=0;
-    char str[255]={};
+    long x=0;
+    long y=0;
+    long m=0;
+    long c=0;
+    long xa=0;
+    long ya=0;
+    long xb=0;
+    long yb=0;
+    char str[9999]={};
     char *st=calloc(strlen(text)+1, sizeof *text);
-    char txt[255]={};
-    char tx[255]={};
+    char txt[9999]={};
+    char tx[9999]={};
     char ke[strlen(key)];
     char k[strlen(key)];
     char ch;
-    int p=0;
-    int q=0;
+    long p=0;
+    long q=0;
     char letter[25] = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if(text[i]<97 || text[i]>122)
         {
@@ -42,7 +64,7 @@ char* playfair_encrypt(const char* key, const char* text)
             }
         }
     }
-    for(int i=0;i<strlen(key);i++)
+    for(long i=0;i<strlen(key);i++)
     {
         if (key[i] >= 97 && key[i] <= 122)
         {
@@ -53,9 +75,10 @@ char* playfair_encrypt(const char* key, const char* text)
             ke[i]=key[i];
         }
     }
-    for(int i=0;i<strlen(key);i++)
+    ke[strlen(key)]='\0';
+    for(long i=0;i<strlen(key);i++)
     {
-        for(int x=0;x<i;x++)
+        for(long x=0;x<i;x++)
         {
             if(ke[i]==ke[x])
             {
@@ -64,14 +87,16 @@ char* playfair_encrypt(const char* key, const char* text)
             }
         }
     }
-    for(int i=0;i<strlen(ke);i++)
+    ke[strlen(key)]='\0';
+    for(long i=0;i<strlen(ke);i++)
     {
         if(ke[i]=='W')
         {
             ke[i]='V';
         }
     }
-    for(int i=0;i<strlen(ke);i++)
+    ke[strlen(key)]='\0';
+    for(long i=0;i<strlen(ke);i++)
     {
         if(ke[i]!=' ')
         {
@@ -82,7 +107,7 @@ char* playfair_encrypt(const char* key, const char* text)
     k[p]='\0';
     for(int i=0;i<25;i++)
     {
-        for(int q=0;q<strlen(k);q++)
+        for(long q=0;q<strlen(k);q++)
         {
             if(k[q]==letter[i])
             {
@@ -103,7 +128,7 @@ char* playfair_encrypt(const char* key, const char* text)
     //printf("%s\n",k);
     x=0;
     y=0;
-    for(int i=0;i<strlen(k);i++)
+    for(long i=0;i<p;i++)
     {
         diagram[y][x]=k[i];
         m++;
@@ -114,8 +139,8 @@ char* playfair_encrypt(const char* key, const char* text)
             y++;
         }
     }
-    int a=m;
-    int b=0;
+    long a=m;
+    long b=0;
     while(a>=5)
     {
         a=a-5;
@@ -149,7 +174,7 @@ char* playfair_encrypt(const char* key, const char* text)
         }
         printf("\n");
     }*/
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if (text[i] >= 97 && text[i] <= 122)
         {
@@ -165,7 +190,7 @@ char* playfair_encrypt(const char* key, const char* text)
         }
     }
     c=0;
-    for(int i=0;i<strlen(txt);i++)
+    for(long i=0;i<strlen(txt);i++)
     {
         if(txt[i]!=' ')
         {
@@ -174,7 +199,7 @@ char* playfair_encrypt(const char* key, const char* text)
         }
     }
     c=0;
-    for(int i=0;i<strlen(tx);i++)
+    for(long i=0;i<strlen(tx);i++)
     {
         str[c]=tx[i];
         c++;
@@ -194,13 +219,13 @@ char* playfair_encrypt(const char* key, const char* text)
     {
         strcat(str,"X");
     }
-    for(int i=0;i<strlen(str);i++)
+    for(long i=0;i<strlen(str);i++)
     {
         char a=str[i];
         char b=str[i+1];
-        for(int y=0;y<5;y++)
+        for(long y=0;y<5;y++)
         {
-            for(int x=0;x<5;x++)
+            for(long x=0;x<5;x++)
             {
                 if(a==diagram[y][x])
                 {
@@ -282,15 +307,37 @@ char* playfair_decrypt(const char* key, const char* text)
     {
         return "NULL";
     }
+    for(long i=0;i<strlen(key);i++)
+    {
+        if(key[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(key)-1)
+        {
+            return "NULL";
+        }
+    }
+    for(long i=0;i<strlen(text);i++)
+    {
+        if(text[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(text)-1)
+        {
+            return "NULL";
+        }
+    }
     char diagram[5][5];
-    int x=0;
-    int y=0;
-    int m=0;
-    int c=0;
-    int xa=0;
-    int ya=0;
-    int xb=0;
-    int yb=0;
+    long x=0;
+    long y=0;
+    long m=0;
+    long c=0;
+    long xa=0;
+    long ya=0;
+    long xb=0;
+    long yb=0;
     char str[255]={};
     char *st=calloc(strlen(text)+1, sizeof *text);
     char txt[255]={};
@@ -298,10 +345,10 @@ char* playfair_decrypt(const char* key, const char* text)
     char ke[strlen(key)];
     char k[strlen(key)];
     char ch;
-    int p=0;
-    int q=0;
+    long p=0;
+    long q=0;
     char letter[25] = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if(text[i]<97 || text[i]>122)
         {
@@ -314,7 +361,7 @@ char* playfair_decrypt(const char* key, const char* text)
             }
         }
     }
-    for(int i=0;i<strlen(key);i++)
+    for(long i=0;i<strlen(key);i++)
     {
         if (key[i] >= 97 && key[i] <= 122)
         {
@@ -325,9 +372,10 @@ char* playfair_decrypt(const char* key, const char* text)
             ke[i]=key[i];
         }
     }
-    for(int i=0;i<strlen(key);i++)
+    ke[strlen(key)]='\0';
+    for(long i=0;i<strlen(key);i++)
     {
-        for(int x=0;x<i;x++)
+        for(long x=0;x<i;x++)
         {
             if(ke[i]==ke[x])
             {
@@ -336,14 +384,16 @@ char* playfair_decrypt(const char* key, const char* text)
             }
         }
     }
-    for(int i=0;i<strlen(ke);i++)
+    ke[strlen(key)]='\0';
+    for(long i=0;i<strlen(ke);i++)
     {
         if(ke[i]=='W')
         {
             ke[i]='V';
         }
     }
-    for(int i=0;i<strlen(ke);i++)
+    ke[strlen(key)]='\0';
+    for(long i=0;i<strlen(ke);i++)
     {
         if(ke[i]!=' ')
         {
@@ -354,7 +404,7 @@ char* playfair_decrypt(const char* key, const char* text)
     k[p]='\0';
     for(int i=0;i<25;i++)
     {
-        for(int q=0;q<strlen(k);q++)
+        for(long q=0;q<strlen(k);q++)
         {
             if(k[q]==letter[i])
             {
@@ -375,7 +425,7 @@ char* playfair_decrypt(const char* key, const char* text)
     //printf("%s\n",k);
     x=0;
     y=0;
-    for(int i=0;i<strlen(k);i++)
+    for(long i=0;i<strlen(k);i++)
     {
         diagram[y][x]=k[i];
         m++;
@@ -386,8 +436,8 @@ char* playfair_decrypt(const char* key, const char* text)
             y++;
         }
     }
-    int a=m;
-    int b=0;
+    long a=m;
+    long b=0;
     while(a>=5)
     {
         a=a-5;
@@ -421,7 +471,7 @@ char* playfair_decrypt(const char* key, const char* text)
         }
         printf("\n");
     }*/
-    for(int i=0;i<strlen(text);i++)
+    for(long i=0;i<strlen(text);i++)
     {
         if (text[i] >= 97 && text[i] <= 122)
         {
@@ -437,7 +487,7 @@ char* playfair_decrypt(const char* key, const char* text)
         }
     }
     c=0;
-    for(int i=0;i<strlen(txt);i++)
+    for(long i=0;i<strlen(txt);i++)
     {
         if(txt[i]!=' ')
         {
@@ -446,7 +496,7 @@ char* playfair_decrypt(const char* key, const char* text)
         }
     }
     c=0;
-    for(int i=0;i<strlen(tx);i++)
+    for(long i=0;i<strlen(tx);i++)
     {
         str[c]=tx[i];
         c++;
@@ -458,13 +508,13 @@ char* playfair_decrypt(const char* key, const char* text)
     {
         strcat(str,"X");
     }
-    for(int i=0;i<strlen(str);i++)
+    for(long i=0;i<strlen(str);i++)
     {
         char a=str[i];
         char b=str[i+1];
-        for(int y=0;y<5;y++)
+        for(long y=0;y<5;y++)
         {
-            for(int x=0;x<5;x++)
+            for(long x=0;x<5;x++)
             {
                 if(a==diagram[y][x])
                 {

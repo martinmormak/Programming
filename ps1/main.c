@@ -6,11 +6,11 @@
 
 int main(){
     char *encrypted;
-    encrypted = playfair_encrypt("SeCReT", "Hello world");
+    encrypted = playfair_encrypt("bermudas", "ethyl");
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;
-    decrypted = playfair_decrypt("SeCReT", "IS JZ JQ XN TK JC");
+    decrypted = playfair_decrypt("justifying", "EM IJ GA RC");
     printf("%s", decrypted);
     printf("\n");
     char* reversed = reverse("Hello world!");
@@ -36,8 +36,8 @@ int main(){
     printf("\n");
     decrypted = bmp_decrypt("CoMPuTeR", encrypted2);
     printf("%s\n", decrypted);
-    free(encrypted);
+    //free(encrypted);
     //free(encrypted2);
     //free(decrypted);
-    free(reversed);
+    //free(reversed);
 }
