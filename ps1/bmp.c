@@ -513,7 +513,7 @@ char* bit_decrypt(const unsigned char* text){
 
 unsigned char* bmp_encrypt(const char* key, const char* text)
 {
-    for(int i=0;i<strlen(key);i++)
+    for(long i=0;i<strlen(key);i++)
     {
         if(key[i]>=97&&key[i]<=122)
         {
@@ -540,7 +540,7 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
 {
-    for(int i=0;i<strlen(key);i++)
+    for(long i=0;i<strlen(key);i++)
     {
         if(key[i]>=97&&key[i]<=122)
         {
