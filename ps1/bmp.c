@@ -20,6 +20,13 @@ char* reverse(const char* text){
         {
             break;
         }
+        else
+        {
+            if(strlen(text)==1)
+            {
+                break;
+            }
+        }
         if(i==strlen(text)-1)
         {
             return "NULL";
@@ -506,6 +513,23 @@ char* bit_decrypt(const unsigned char* text){
 
 unsigned char* bmp_encrypt(const char* key, const char* text)
 {
+    for(int i=0;i<strlen(key);i++)
+    {
+        if(key[i]>=97&&key[i]<=122)
+        {
+            break;
+        }
+        else if(key[i]>=65&&key[i]<=90)
+        {
+            break;
+        }
+        /*if(i==strlen(key)-1)
+        {
+            unsigned char *n;
+            n="NULL";
+            return n;
+        }*/
+    }
     char* reversed=reverse(text);
     printf("    %s\n",reversed);
     char* encrypted = vigenere_encrypt(key, reversed);
@@ -516,6 +540,22 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
 {
+    for(int i=0;i<strlen(key);i++)
+    {
+        if(key[i]>=97&&key[i]<=122)
+        {
+            break;
+        }
+        else if(key[i]>=65&&key[i]<=90)
+        {
+            break;
+        }
+        if(i==strlen(key)-1)
+        {
+            return "NULL";
+        }
+    }
+
     for(long i=0;i<strlen(key);i++)
     {
         if(key[i]!=' ')

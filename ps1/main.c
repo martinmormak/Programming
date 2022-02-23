@@ -6,14 +6,14 @@
 
 int main(){
     char *encrypted;
-    encrypted = playfair_encrypt("bermudas", "ethyl");
+    encrypted = playfair_encrypt(/*"bermudas"*/" !", "ethyl");
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;
-    decrypted = playfair_decrypt("justifying", "EM IJ GA RC");
+    decrypted = playfair_decrypt("Tej to nebolo po voli", "MH CB VF KX SG EN IB VT VE XS FJ TJ TB MI JT BG TG QH UN BU DS GS CH PB CB FE IM JC OS RJ LR FX TU EJ TJ VT CE QN LB PU");
     printf("%s", decrypted);
     printf("\n");
-    char* reversed = reverse("Hello world!");
+    char* reversed = reverse("NULL"/*"Hello world!"*/);
     printf("%s", reversed);
     printf("\n");
     encrypted = vigenere_encrypt("CoMPuTeR", "Hello world!");
