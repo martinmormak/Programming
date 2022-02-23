@@ -305,7 +305,7 @@ unsigned char* bit_encrypt(const char* text){
         return "NULL";
     }*/
     int index=0;
-    char str[255];
+    //char str[255];
     unsigned char *string = calloc(strlen(text)+1,sizeof *text);
     for(int i=0;i<strlen(text);i++)
     {
@@ -321,7 +321,7 @@ unsigned char* bit_encrypt(const char* text){
         tmp=bit[0];
         bit[0]=bit[1];
         bit[1]=tmp;
-        tmp=bit[2];
+
         bit[2]=bit[3];
         bit[3]=tmp;
         for(int x=0;x<4;x++)
@@ -344,7 +344,7 @@ unsigned char* bit_encrypt(const char* text){
             }
         }
         //printf("%d\n",a);
-        str[index]=(char)a;
+        string[index]=(unsigned char)a;
         index++;
         /*int a=0;
         int b=0;
@@ -386,8 +386,12 @@ unsigned char* bit_encrypt(const char* text){
         //printf("    -   %d\n",a);
     }
     //printf("%s\n",str);
-    str[index]='\0';
-    string = (unsigned char*) str;
+    string[index]='\0';
+    /*for(int i=0; i < index;i++) {
+        printf("%x ", string[i]);
+    }
+    printf("\n");*/
+    //string = (unsigned char*) str;
     //printf("%s\n",string);
     return string;
 }
@@ -398,17 +402,18 @@ char* bit_decrypt(const unsigned char* text){
         return "NULL";
     }*/
     int index=0;
-    char *txt = calloc(255,8);
-    txt=(char*)text;
-    char str[255];
+    //char *txt = calloc(255,8);
+    //txt=(char*)text;
+    //char str[255];
     char *string = calloc(255,8);
     int num;
     //printf("%s\n",txt);
-    for(int i=0;i<strlen(txt);i++)
+    int i=0;
+    while(text[i]!='\0')
     {
         int tmp;
         int bit[8]={0,0,0,0,0,0,0,0};
-        num=(int)txt[i];
+        num=(int)text[i];
         if(num<0)
         {
             num=num+256;
@@ -444,12 +449,13 @@ char* bit_decrypt(const unsigned char* text){
                 a=a+pow(2,x);
             }
         }
-        str[index]=(char)a;
+        string[index]=(unsigned char)a;
         index++;
+        i++;
     }
-    str[index]='\0';
+    string[index]='\0';
     //printf("%s\n",str);
-    string = str;
+    //string = str;
     //printf("%s\n",string);
     return string;
 }
