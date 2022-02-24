@@ -10,7 +10,7 @@ int main(){
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;
-    decrypted = playfair_decrypt("justifying", "EM IJ GA RC");
+    decrypted = playfair_decrypt("SeCReT", encrypted);
     printf("%s", decrypted);
     printf("\n");
     char* reversed = reverse("NULL"/*"Hello world!"*/);
