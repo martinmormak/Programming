@@ -6,7 +6,7 @@
 
 int main(){
     char *encrypted;
-    encrypted = playfair_encrypt("bermudas", "ethyl");
+    encrypted = playfair_encrypt("SeCReT", "Hello world");
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;

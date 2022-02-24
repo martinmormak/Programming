@@ -12,7 +12,6 @@ code analysis: $(SOURCES)
 
 $(OUTPUT): main.o bmp.o playfair.o
 	echo "Running compilation"
-	cppcheck --enable=warning,performance,unusedFunction --error-exitcode=1 bmp.c playfair.c main.c
 	$(CC) $(CFLAGS) $^ $(LDLIBS) -o $(OUTPUT)
 
 main.o: main.c
