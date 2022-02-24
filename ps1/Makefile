@@ -7,12 +7,12 @@ SOURCES=main.c bmp.c playfair.c
 
 all: ps1
 
-code analysis: $(SOURCES)
+codeanalysis: $(SOURCES)
 	cppcheck --enable=unusedFunction --error-exitcode=1 $^
 
 $(OUTPUT): main.o bmp.o playfair.o
 	echo "Running compilation"
-	$(CC) $(CFLAGS) $^ $(LDLIBS) -o $(OUTPUT)
+	$(CC) $(CFLAGS) main.o bmp.o playfair.o $(LDLIBS) -o $(OUTPUT)
 
 main.o: main.c
 	echo "Building object file main.o"
@@ -26,16 +26,5 @@ playfair.o: playfair.c
 	echo "Building object file playfair.o"
 	$(CC) $(CFLAGS) -c $^ $(LDLIBS) -o $@
 
-test: bmp.o tests/tests_bmp_encrypt.c tests/tests_bmp_decrypt.c
-	$(CC) $(CFLAGS) bmp.o tests/tests_bmp_encrypt.c $(LDLIBS) -o bin/test_encrypt
-	$(CC) $(CFLAGS) bmp.o tests/tests_bmp_decrypt.c $(LDLIBS) -o bin/test_decrypt
-	./bin/test_encrypt
-	./bin/test_decrypt
-
 clean:
 	rm -rf *o $(OUTPUT) bin/*
-
-push:
-	git commit -a
-	git push
-

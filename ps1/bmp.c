@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "bmp.h"
 
@@ -12,6 +13,10 @@ char* reverse(const char* text)
         return NULL;
     }
     if(text[0]=='N'&&text[1]=='U'&&text[2]=='L'&&text[3]=='L')
+    {
+        return NULL;
+    }
+    if(text[0]=='('&&text[1]=='n'&&text[2]=='u'&&text[3]=='l'&&text[4]=='l'&&text[5]==')')
     {
         return NULL;
     }
@@ -55,14 +60,11 @@ char* vigenere_encrypt(const char* key, const char* text)
     {
         return NULL;
     }
-    for(long i=0;i<strlen(key);i++)
+    for(int i=0;i<strlen(key);i++)
     {
-        if(key[i]<97||key[i]>122)
+        if(isalpha(key[i])==0)
         {
-            if(key[i]<65||key[i]>90)
-            {
-                return NULL;
-            }
+            return NULL;
         }
     }
     for(long i=0;i<strlen(key);i++)
@@ -213,14 +215,12 @@ char* vigenere_decrypt(const char* key, const char* text)
     {
         return NULL;
     }
-    for(long i=0;i<strlen(key);i++)
+    for(int i=0;i<strlen(key);i++)
     {
-        if(key[i]<97||key[i]>122)
+        if(isalpha(key[i])==0)
         {
-            if(key[i]<65||key[i]>90)
-            {
-                return NULL;
-            }
+            printf("Ahoj");
+            return NULL;
         }
     }
     for(long i=0;i<strlen(key);i++)
@@ -428,7 +428,7 @@ char* bit_decrypt(const unsigned char* text)
     {
         return NULL;
     }
-    long index=0;
+    int index=0;
     char *string = calloc(255,8);
     int num;
     long i=0;
@@ -487,16 +487,9 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
     }
     for(int i=0;i<strlen(key);i++)
     {
-        if(key[i]>=97&&key[i]<=122)
+        if(isalpha(key[i])==0)
         {
-            break;
-        }
-        else if(key[i]>=65&&key[i]<=90)
-        {
-            break;
-        }
-        if(i==strlen(key)-1)
-        {
+            printf("Ahoj");
             return NULL;
         }
     }
@@ -510,19 +503,19 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
 {
+    printf("A");
+    for(int i=0;i<strlen(key);i++)
+    {
+        printf("ahoj");
+        if(isalpha(key[i])==0)
+        {
+            printf("Ahoj");
+            return NULL;
+        }
+    }
     if(text == NULL||strlen(key)==0||key==NULL)
     {
         return NULL;
-    }
-    for(int i=0;i<strlen(key);i++)
-    {
-        if(key[i]<97||key[i]>122)
-        {
-            if(key[i]<65||key[i]>90)
-            {
-                return NULL;
-            }
-        }
     }
     char* reversed=bit_decrypt(text);
     printf("    %s\n",reversed);
