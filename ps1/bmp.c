@@ -11,6 +11,10 @@ char* reverse(const char* text)
     {
         return NULL;
     }
+    if(text[0]=='N'&&text[1]=='U'&&text[2]=='L'&&text[3]=='L')
+    {
+        return NULL;
+    }
     for(long i=0;i<strlen(text);i++)
     {
         if(text[i]!=' ')
@@ -119,14 +123,6 @@ char* vigenere_encrypt(const char* key, const char* text)
         }
     }
     ke[strlen(key)]='\0';
-    /*for(int i=0;i<26;i++)
-    {
-        for(int x=0;x<26;x++)
-        {
-            printf("%c",table[i][x]);
-        }
-        printf("\n");
-    }*/
     p=0;
     for(long i=0;i<strlen(text);i++)
     {
@@ -208,7 +204,6 @@ char* vigenere_encrypt(const char* key, const char* text)
         }
     }
     str[strlen(text)]='\0';
-    //printf("%s\n",str);
     return str;
 }
 
@@ -286,14 +281,6 @@ char* vigenere_decrypt(const char* key, const char* text)
         }
     }
     ke[strlen(key)]='\0';
-    /*for(int i=0;i<26;i++)
-    {
-        for(int x=0;x<26;x++)
-        {
-            printf("%c",table[i][x]);
-        }
-        printf("\n");
-    }*/
     p=0;
     for(long i=0;i<strlen(text);i++)
     {
@@ -382,7 +369,6 @@ char* vigenere_decrypt(const char* key, const char* text)
         }
     }
     str[strlen(text)]='\0';
-    //printf("%s\n",str);
     return str;
 }
 
@@ -392,26 +378,13 @@ unsigned char* bit_encrypt(const char* text)
     {
         return NULL;
     }
-    /*for(long i=0;i<strlen(text);i++)
-    {
-        if(text[i]!=' ')
-        {
-            break;
-        }
-        if(i==strlen(text)-1)
-        {
-            return c;
-        }
-    }*/
     long index=0;
-    //char str[255];
     unsigned char *string = calloc(strlen(text)+1,sizeof *text);
     for(long i=0;i<strlen(text);i++)
     {
         int tmp;
         int bit[8]={0,0,0,0,0,0,0,0};
         int num=(int)text[i];
-        //printf("%d  -   ",num);
         for(int x=7;x>=0;x--)
         {
             bit[x]=num%2;
@@ -442,18 +415,10 @@ unsigned char* bit_encrypt(const char* text)
                 a=a+pow(2,x);
             }
         }
-        //printf("%d\n",a);
         string[index]=(unsigned char)a;
         index++;
     }
-    //printf("%s\n",str);
     string[index]='\0';
-    /*for(int i=0; i < index;i++) {
-        printf("%x ", string[i]);
-    }
-    printf("\n");*/
-    //string = (unsigned char*) str;
-    //printf("%s\n",string);
     return string;
 }
 
@@ -464,12 +429,8 @@ char* bit_decrypt(const unsigned char* text)
         return NULL;
     }
     long index=0;
-    //char *txt = calloc(255,8);
-    //txt=(char*)text;
-    //char str[255];
     char *string = calloc(255,8);
     int num;
-    //printf("%s\n",txt);
     long i=0;
     while(text[i]!='\0')
     {
@@ -480,7 +441,6 @@ char* bit_decrypt(const unsigned char* text)
         {
             num=num+256;
         }
-        //printf("%d\n",num);
         for(int x=7;x>=0;x--)
         {
             bit[x]=num%2;
@@ -516,19 +476,16 @@ char* bit_decrypt(const unsigned char* text)
         i++;
     }
     string[index]='\0';
-    //printf("%s\n",str);
-    //string = str;
-    //printf("%s\n",string);
     return string;
 }
 
 unsigned char* bmp_encrypt(const char* key, const char* text)
 {
-    if(strlen(text)==0||text == NULL||strlen(key)==0||key==NULL)
+    if(text == NULL||strlen(key)==0||key==NULL)
     {
         return NULL;
     }
-    for(long i=0;i<strlen(key);i++)
+    for(int i=0;i<strlen(key);i++)
     {
         if(key[i]>=97&&key[i]<=122)
         {
@@ -557,34 +514,14 @@ char* bmp_decrypt(const char* key, const unsigned char* text)
     {
         return NULL;
     }
-    for(long i=0;i<strlen(key);i++)
+    for(int i=0;i<strlen(key);i++)
     {
-        if(key[i]>=65&&key[i]<=90)
+        if(key[i]<97||key[i]>122)
         {
-            break;
-        }
-        else if(key[i]>=97&&key[i]<=122)
-        {
-            break;
-        }
-        else
-        {
-            return NULL;
-        }
-        if(i==strlen(key)-1)
-        {
-            return NULL;
-        }
-    }
-    for(long i=0;i<strlen(key);i++)
-    {
-        if(key[i]!=' ')
-        {
-            break;
-        }
-        if(i==strlen(key)-1)
-        {
-            return NULL;
+            if(key[i]<65||key[i]>90)
+            {
+                return NULL;
+            }
         }
     }
     char* reversed=bit_decrypt(text);

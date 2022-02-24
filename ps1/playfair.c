@@ -257,14 +257,6 @@ char* playfair_encrypt(const char* key, const char* text)
         }
         i++;
     }
-    for(int i=0;i<5;i++)
-    {
-        for(int w=0;w<5;w++)
-        {
-            printf("%c",diagram[i][w]);
-        }
-        printf("\n");
-    }
     return st;
 }
 
@@ -502,14 +494,6 @@ char* playfair_decrypt(const char* key, const char* text)
             q++;
         }
         i++;
-    }
-    for(int i=0;i<5;i++)
-    {
-        for(int w=0;w<5;w++)
-        {
-            printf("%c",diagram[i][w]);
-        }
-        printf("\n");
     }
     return st;
 }

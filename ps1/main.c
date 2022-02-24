@@ -34,7 +34,7 @@ int main(){
         printf("%x ", encrypted2[i]);
     }
     printf("\n");
-    decrypted = bmp_decrypt(" !"/*"CoMPuTeR"*/, encrypted2);
+    decrypted = bmp_decrypt("CoMPuTeR", encrypted2);
     printf("%s\n", decrypted);
     //free(encrypted);
     //free(encrypted2);
