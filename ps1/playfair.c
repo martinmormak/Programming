@@ -12,7 +12,11 @@ char* playfair_encrypt(const char* key, const char* text)
     }
     for(long i=0;i<strlen(key);i++)
     {
-        if(key[i]!=' ')
+        if(key[i]>=65&&key[i]<=90)
+        {
+            break;
+        }
+        else if(key[i]>=97&&key[i]<=122)
         {
             break;
         }
@@ -317,7 +321,11 @@ char* playfair_decrypt(const char* key, const char* text)
     }
     for(long i=0;i<strlen(key);i++)
     {
-        if(key[i]!=' ')
+        if(key[i]>=65&&key[i]<=90)
+        {
+            break;
+        }
+        else if(key[i]>=97&&key[i]<=122)
         {
             break;
         }
@@ -405,7 +413,7 @@ char* playfair_decrypt(const char* key, const char* text)
     {
         if(ke[i]=='W')
         {
-            ke[i]='V';
+            return "NULL";
         }
     }
     ke[strlen(key)]='\0';
@@ -499,7 +507,7 @@ char* playfair_decrypt(const char* key, const char* text)
         }
         if(txt[i]=='W')
         {
-            txt[i]='V';
+            return "NULL";
         }
     }
     c=0;

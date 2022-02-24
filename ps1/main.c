@@ -6,11 +6,11 @@
 
 int main(){
     char *encrypted;
-    encrypted = playfair_encrypt(/*"bermudas"*/" !", "ethyl");
+    encrypted = playfair_encrypt("bermudas", "ethyl");
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;
-    decrypted = playfair_decrypt(" !#$%&'()*+,-./0","squiggling");
+    decrypted = playfair_decrypt("justifying", "EM IJ GA RC");
     printf("%s", decrypted);
     printf("\n");
     char* reversed = reverse("NULL"/*"Hello world!"*/);
@@ -18,7 +18,7 @@ int main(){
     printf("\n");
     encrypted = vigenere_encrypt("CoMPuTeR", "Hello world!");
     printf("%s\n", encrypted);
-    decrypted = vigenere_decrypt("CoMPuTeR", "JSXAI PSINR!");
+    decrypted = vigenere_decrypt("CoMPuTeR", encrypted);
     printf("%s\n", decrypted);
     unsigned char* encrypted2;
     encrypted2 = bit_encrypt("Hello world!");

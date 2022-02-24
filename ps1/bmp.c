@@ -389,9 +389,25 @@ char* vigenere_decrypt(const char* key, const char* text){
 
 
 unsigned char* bit_encrypt(const char* text){
-    /*if(strlen(text)==0)
+    /*unsigned char *c[4];
+    c[0]='N';
+    c[1]='U';
+    c[2]='L';
+    c[3]='L';*/
+    if(strlen(text)==0)
     {
-        return "NULL";
+        return NULL;
+    }
+    /*for(long i=0;i<strlen(text);i++)
+    {
+        if(text[i]!=' ')
+        {
+            break;
+        }
+        if(i==strlen(text)-1)
+        {
+            return c;
+        }
     }*/
     long index=0;
     //char str[255];
@@ -542,13 +558,17 @@ char* bmp_decrypt(const char* key, const unsigned char* text)
 {
     for(long i=0;i<strlen(key);i++)
     {
-        if(key[i]>=97&&key[i]<=122)
+        if(key[i]>=65&&key[i]<=90)
         {
             break;
         }
-        else if(key[i]>=65&&key[i]<=90)
+        else if(key[i]>=97&&key[i]<=122)
         {
             break;
+        }
+        else
+        {
+            return "NULL";
         }
         if(i==strlen(key)-1)
         {
