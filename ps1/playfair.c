@@ -131,7 +131,7 @@ char* playfair_encrypt(const char* key, const char* text)
     str[p]='\0';
     if(strlen(str)%2!=0)
     {
-        str[p]='X';
+        str[strlen(str)]='X';
         p++;
     }
     str[p]='\0';
