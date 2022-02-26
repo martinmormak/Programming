@@ -259,7 +259,7 @@ char* playfair_decrypt(const char* key, const char* text)
     char tx[255];
     int l=strlen(text)+4;
     l=l/3;
-    char *st=calloc(l,sizeof *text);
+    char *st=calloc(l, sizeof *text);
     int xa=0;
     int ya=0;
     int xb=0;
