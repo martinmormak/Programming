@@ -211,7 +211,6 @@ char* vigenere_decrypt(const char* key, const char* text)
     {
         if(isalpha(key[i])==0)
         {
-            printf("Ahoj");
             return NULL;
         }
     }
