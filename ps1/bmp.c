@@ -484,15 +484,19 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
         }
     }
     char* reversed=reverse(text);
-    printf("    %s\n",reversed);
+    //printf("    %s\n",reversed);
     char* encrypted = vigenere_encrypt(key, reversed);
-    printf("    %s\n",encrypted);
+    //printf("    %s\n",encrypted);
     free(reversed);
     return bit_encrypt(encrypted);
 }
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
 {
+    if(text == NULL||key==NULL)
+    {
+        return NULL;
+    }
     for(int i=0;i<strlen(key);i++)
     {
         if(isalpha(key[i])==0)
@@ -500,14 +504,10 @@ char* bmp_decrypt(const char* key, const unsigned char* text)
             return NULL;
         }
     }
-    if(text == NULL||key==NULL)
-    {
-        return NULL;
-    }
     char* reversed=bit_decrypt(text);
-    printf("    %s\n",reversed);
+    //printf("    %s\n",reversed);
     char* decrypted = vigenere_decrypt(key, reversed);
-    printf("    %s\n",decrypted);
+    //printf("    %s\n",decrypted);
     free(reversed);
     return reverse(decrypted);
 }
