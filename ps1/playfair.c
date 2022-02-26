@@ -89,14 +89,6 @@ char* playfair_encrypt(const char* key, const char* text)
             p++;
         }
     }
-    /*for(int y=0;y<5;y++)
-    {
-        for(int x=0;x<5;x++)
-        {
-            printf("%c",diagram[y][x]);
-        }
-        printf("\n");
-    }*/
     for(int i=0;i<strlen(text);i++)
     {
         if(text[i]>=97&&text[i]<=122)
@@ -312,14 +304,6 @@ char* playfair_decrypt(const char* key, const char* text)
             p++;
         }
     }
-    /*for(int y=0;y<5;y++)
-    {
-        for(int x=0;x<5;x++)
-        {
-            printf("%c",diagram[y][x]);
-        }
-        printf("\n");
-    }*/
     for(int i=0;i<strlen(text);i++)
     {
         if(text[i]>=97&&text[i]<=122)

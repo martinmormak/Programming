@@ -484,9 +484,7 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
         }
     }
     char* reversed=reverse(text);
-    //printf("    %s\n",reversed);
     char* encrypted = vigenere_encrypt(key, reversed);
-    //printf("    %s\n",encrypted);
     free(reversed);
     return bit_encrypt(encrypted);
 }
@@ -505,9 +503,7 @@ char* bmp_decrypt(const char* key, const unsigned char* text)
         }
     }
     char* reversed=bit_decrypt(text);
-    //printf("    %s\n",reversed);
     char* decrypted = vigenere_decrypt(key, reversed);
-    //printf("    %s\n",decrypted);
     free(reversed);
     return reverse(decrypted);
 }
