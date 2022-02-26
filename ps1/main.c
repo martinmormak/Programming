@@ -6,11 +6,11 @@
 
 int main(){
     char *encrypted;
-    encrypted = playfair_encrypt("dote!", "optometry");
+    encrypted = playfair_encrypt("dote", "optometry");
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;
-    decrypted = playfair_decrypt("SeCReT", encrypted);
+    decrypted = playfair_decrypt("dote", encrypted);
     printf("%s", decrypted);
     printf("\n");
     char* reversed = reverse("NULL"/*"Hello world!"*/);
