@@ -7,7 +7,7 @@
 
 char* playfair_encrypt(const char* key, const char* text)
 {
-    if(strlen(key)==0||key==NULL||strlen(text)==0||text==NULL)
+    if(key==NULL||text==NULL)
     {
         return NULL;
     }
@@ -15,6 +15,7 @@ char* playfair_encrypt(const char* key, const char* text)
     {
         if(isalpha(text[i])==0)
         {
+            printf("Non alpha\n");
             if(text[i]!=' ')
             {
                 return NULL;
@@ -29,7 +30,7 @@ char* playfair_encrypt(const char* key, const char* text)
     char tx[strlen(text)];
     int p=0;
     char str[strlen(text)];
-    char *st=calloc(strlen(text)+1,sizeof *text);
+    char *st=calloc(strlen(text)+1,sizeof *text);;
     int xa;
     int ya;
     int xb;

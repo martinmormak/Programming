@@ -6,7 +6,7 @@
 
 int main(){
     char *encrypted;
-    encrypted = playfair_encrypt("dote", "optometry");
+    encrypted = playfair_encrypt("dote!", "optometry");
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;

@@ -8,15 +8,7 @@
 
 char* reverse(const char* text)
 {
-    if(strlen(text)==0||text == NULL)
-    {
-        return NULL;
-    }
-    if(text[0]=='N'&&text[1]=='U'&&text[2]=='L'&&text[3]=='L')
-    {
-        return NULL;
-    }
-    if(text[0]=='('&&text[1]=='n'&&text[2]=='u'&&text[3]=='l'&&text[4]=='l'&&text[5]==')')
+    if(text == NULL)
     {
         return NULL;
     }
@@ -56,7 +48,7 @@ char* reverse(const char* text)
 
 char* vigenere_encrypt(const char* key, const char* text)
 {
-    if(strlen(text)==0||text == NULL||strlen(key)==0||key==NULL)
+    if(text == NULL||key==NULL)
     {
         return NULL;
     }
@@ -211,7 +203,7 @@ char* vigenere_encrypt(const char* key, const char* text)
 
 char* vigenere_decrypt(const char* key, const char* text)
 {
-    if(strlen(text)==0||text == NULL||strlen(key)==0||key==NULL)
+    if(text == NULL||key==NULL)
     {
         return NULL;
     }
@@ -374,7 +366,7 @@ char* vigenere_decrypt(const char* key, const char* text)
 
 unsigned char* bit_encrypt(const char* text)
 {
-    if(strlen(text)==0||text == NULL)
+    if(text == NULL)
     {
         return NULL;
     }
@@ -481,7 +473,7 @@ char* bit_decrypt(const unsigned char* text)
 
 unsigned char* bmp_encrypt(const char* key, const char* text)
 {
-    if(text == NULL||strlen(key)==0||key==NULL)
+    if(text == NULL||key==NULL)
     {
         return NULL;
     }
@@ -489,7 +481,6 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
     {
         if(isalpha(key[i])==0)
         {
-            printf("Ahoj");
             return NULL;
         }
     }
@@ -503,17 +494,14 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
 {
-    printf("A");
     for(int i=0;i<strlen(key);i++)
     {
-        printf("ahoj");
         if(isalpha(key[i])==0)
         {
-            printf("Ahoj");
             return NULL;
         }
     }
-    if(text == NULL||strlen(key)==0||key==NULL)
+    if(text == NULL||key==NULL)
     {
         return NULL;
     }
