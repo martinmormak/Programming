@@ -18,7 +18,7 @@ int main(){
     printf("\n");
     encrypted = vigenere_encrypt("CoMPuTeR", "Hello world!");
     printf("%s\n", encrypted);
-    decrypted = vigenere_decrypt(/*"CoMPuTeR"*/NULL, encrypted);
+    decrypted = vigenere_decrypt("CoMPuTeR", encrypted);
     printf("%s\n", decrypted);
     unsigned char* encrypted2;
     encrypted2 = bit_encrypt("Hello world!");
