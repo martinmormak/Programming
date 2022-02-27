@@ -11,7 +11,7 @@ char* playfair_encrypt(const char* key, const char* text)
     {
         return NULL;
     }
-    if(strlen(key)==1 && key[0]==' ')
+    if(strlen(key)==1&&key[0]==' ')
     {
         return NULL;
     }
