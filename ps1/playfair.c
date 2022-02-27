@@ -42,7 +42,7 @@ char* playfair_encrypt(const char* key, const char* text)
     int l=0;
     int p=0;
     char str[strlen(text)];
-    char *st=calloc(strlen(text)+1,sizeof *text);
+    //char *st=calloc(strlen(text)+1,sizeof *text);
     int xa;
     int ya;
     int xb;
@@ -141,6 +141,9 @@ char* playfair_encrypt(const char* key, const char* text)
     }
     str[p]='\0';
     p=0;
+    l=l/2;
+    l=l*3;
+    char *st=calloc(l,sizeof *text);
     for(int i=0;i<strlen(str);i++)
     {
         char a=str[i];

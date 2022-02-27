@@ -18,7 +18,7 @@ int main(){
     printf("\n");
     encrypted = vigenere_encrypt("CoMPuTeR", "Hello world!");
     printf("%s\n", encrypted);
-    decrypted = vigenere_decrypt("CoMPuTeR", encrypted);
+    decrypted = vigenere_decrypt(/*"CoMPuTeR"*/NULL, encrypted);
     printf("%s\n", decrypted);
     unsigned char* encrypted2;
     encrypted2 = bit_encrypt("Hello world!");
@@ -34,7 +34,7 @@ int main(){
         printf("%x ", encrypted2[i]);
     }
     printf("\n");
-    decrypted = bmp_decrypt(NULL/*"CoMPuTeR"*/, encrypted2);
+    decrypted = bmp_decrypt("CoMPuTeR", encrypted2);
     printf("%s\n", decrypted);
     //free(encrypted);
     //free(encrypted2);
