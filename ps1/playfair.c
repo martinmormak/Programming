@@ -7,7 +7,7 @@
 
 char* playfair_encrypt(const char* key, const char* text)
 {
-    if(key==NULL||text==NULL)
+    if(key==NULL || text==NULL)
     {
         return NULL;
     }
