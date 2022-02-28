@@ -84,7 +84,6 @@ char* vigenere_encrypt(const char* key, const char* text)
     char ke[strlen(key)];
     char k[strlen(text)];
     char txt[strlen(text)];
-    char *str = calloc(strlen(text)+1,sizeof *text);
     long p=0;
     long x=0;
     long y=0;
@@ -175,6 +174,7 @@ char* vigenere_encrypt(const char* key, const char* text)
     {"YZABCDEFGHIJKLMNOPQRSTUVWX"},
     {"ZABCDEFGHIJKLMNOPQRSTUVWXY"}
     };
+    char *str = calloc(strlen(text)+1,sizeof *text);
     for(long i=0;i<strlen(text);i++)
     {
         if(txt[i]>=65&&txt[i]<=90)
