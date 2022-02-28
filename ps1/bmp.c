@@ -487,7 +487,7 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
     char* encrypted = vigenere_encrypt(key, reversed);
     free(reversed);
     unsigned char* b_encrypt = bit_encrypt(encrypted);
-    free (encrypted);
+    free(encrypted);
     return b_encrypt;
 }
 

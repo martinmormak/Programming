@@ -11,7 +11,7 @@ int main(){
     printf("%s", encrypted);
     printf("\n");
     char *decrypted;
-    decrypted = playfair_decrypt("dote", encrypted);
+    decrypted = playfair_decrypt("frogs", encrypted);
     printf("%s", decrypted);
     printf("\n");
     char* reversed = reverse("NULL"/*"Hello world!"*/);
@@ -30,7 +30,7 @@ int main(){
     decrypted = bit_decrypt(encrypted2);
     printf("%s",decrypted);
     printf("\n");
-    encrypted2 = bmp_encrypt("CoMPuTeR", "Hello world!");
+    encrypted2 = bmp_encrypt("CoMPuTeRCOMPUTERCOMPUTERCOMPUTERCOMPUTERCOMPUTERCOMPUTER", "Hello world!");
     for(int i=0; i < 12;i++) {
         printf("%x ", encrypted2[i]);
     }
