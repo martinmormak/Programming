@@ -42,7 +42,7 @@ char* playfair_encrypt(const char* key, const char* text)
     int l=0;
     int p=0;
     char str[strlen(text)];
-    char *st=calloc(strlen(text)+1,sizeof *text);
+    char *st=calloc(strlen(text)+10,sizeof (char*));
     int xa;
     int ya;
     int xb;
@@ -259,7 +259,7 @@ char* playfair_decrypt(const char* key, const char* text)
     char tx[255];
     int l=strlen(text)+4;
     l=l/3;
-    char *st=calloc(l, sizeof *text);
+    char *st=calloc(l, sizeof (char*));
     int xa=0;
     int ya=0;
     int xb=0;

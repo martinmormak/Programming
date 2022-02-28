@@ -239,7 +239,7 @@ char* vigenere_decrypt(const char* key, const char* text)
     char ke[strlen(key)];
     char k[strlen(text)];
     char txt[strlen(text)];
-    char *str = calloc(strlen(text)+1,sizeof *text);
+    char *str = calloc(strlen(text)+1,sizeof (char*));
     long p=0;
     long x=0;
     long y=0;
@@ -370,7 +370,7 @@ unsigned char* bit_encrypt(const char* text)
         return NULL;
     }
     long index=0;
-    unsigned char *string = calloc(strlen(text)+1,sizeof *text);
+    unsigned char *string = calloc(strlen(text)+1,sizeof (char*));
     for(long i=0;i<strlen(text);i++)
     {
         int tmp;
