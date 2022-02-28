@@ -128,10 +128,19 @@ char* playfair_encrypt(const char* key, const char* text)
                 str[p]='X';
                 p++;
             }
+            else
+            {
+                i++;
+                str[p]=tx[i];
+                p++;
+            }
         }
-        i++;
-        str[p]=tx[i];
-        p++;
+        else
+        {
+            i++;
+            str[p]=tx[i];
+            p++;
+        }
     }
     str[p]='\0';
     if(strlen(str)%2!=0)
@@ -257,9 +266,6 @@ char* playfair_decrypt(const char* key, const char* text)
     int p=0;
     char txt[255];
     char tx[255];
-    int l=strlen(text)+4;
-    l=l/3;
-    char *st=calloc(l, sizeof (char*));
     int xa=0;
     int ya=0;
     int xb=0;
@@ -333,6 +339,9 @@ char* playfair_decrypt(const char* key, const char* text)
     }
     tx[p]='\0';
     p=0;
+    int l=strlen(text)+4;
+    l=l/3;
+    char *st=calloc(l, sizeof (char*));
     for(int i=0;i<strlen(tx);i++)
     {
         char a=tx[i];
