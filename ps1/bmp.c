@@ -486,7 +486,9 @@ unsigned char* bmp_encrypt(const char* key, const char* text)
     char* reversed=reverse(text);
     char* encrypted = vigenere_encrypt(key, reversed);
     free(reversed);
-    return bit_encrypt(encrypted);
+    unsigned char* b_encrypt = bit_encrypt(encrypted);
+    free (encrypted);
+    return b_encrypt;
 }
 
 char* bmp_decrypt(const char* key, const unsigned char* text)
@@ -505,7 +507,9 @@ char* bmp_decrypt(const char* key, const unsigned char* text)
     char* reversed=bit_decrypt(text);
     char* decrypted = vigenere_decrypt(key, reversed);
     free(reversed);
-    return reverse(decrypted);
+    char* b_decrypt = reverse(decrypted);
+    free(decrypted);
+    return b_decrypt;
 }
 
 /*char* ceasar_encrypt(const char* text, const int step)
