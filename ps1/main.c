@@ -21,7 +21,7 @@ int main(){
     printf("\n");
     free(reversed);
     char* encrypted2;
-    encrypted2 = vigenere_encrypt("CoMPuTeR", "Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!Hello world!");
+    encrypted2 = vigenere_encrypt("CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR CoMPuTeR", "Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!");
     printf("%s\n", encrypted2);
     char* decrypted2;
     decrypted2 = vigenere_decrypt("CoMPuTeR", encrypted2);
