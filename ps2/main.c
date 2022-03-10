@@ -8,15 +8,16 @@
 int main()
 {
     //game is won
-    // struct game game = {
-    //     .board = {
-    //         {'A', ' ', ' ', ' '},
-    //         {' ', ' ', ' ', ' '},
-    //         {' ', ' ', ' ', 'A'},
-    //         {'B', ' ', ' ', ' '}
-    //     },
-    //     .score = 0
-    // };
+    struct game game = {
+        .board = {
+            {'A', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', 'A'},
+            {'B', ' ', ' ', ' '}
+        },
+        .score = 0
+    };
+    is_game_won(game);
     // printf("is won: %d\n", is_game_won(game));
 
     //another move is possible
@@ -29,6 +30,7 @@ int main()
     //     },
     //     .score = 0
     // };
+    is_move_possible(game);
     // printf("is move possible: %d\n", is_move_possible(game));
 
     //move
@@ -41,7 +43,7 @@ int main()
     //     },
     //     .score = 0
     // };
-    // bool result = update(&game, 1, 0);
+    bool result = update(&game, 1, 0);
     // printf("%s\n", result ? "true" : "false");
 
     //write on the screen
@@ -49,6 +51,14 @@ int main()
 
     //load from document
     struct player list[10];
-    load(list);
+    int size=load(list);
+    printf("%d\n",size);
+    struct player player = {
+        .name = "John",
+        .score = 100
+    };
+    result = add_player(list, &size, player);
+    result = save(list, size);
+    printf("%d\n",result);
     return 0;
 }

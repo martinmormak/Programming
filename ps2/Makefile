@@ -8,7 +8,7 @@ SOURCES=main.c k.c hof.c ui.c
 all: ps2
 
 codeanalysis: $(SOURCES)
-	cppcheck --enable=unusedFunction --error-exitcode=1 $^
+	cppcheck --enable=performance,unusedFunction --error-exitcode=1 k.c hof.c main.c ui.c
 
 $(OUTPUT): main.o k.o hof.o ui.o
 	echo "Running compilation"

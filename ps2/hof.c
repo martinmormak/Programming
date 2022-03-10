@@ -28,7 +28,7 @@ int load(struct player list[])
         //printf("%s\n",list[i].name);
         //printf("%s\t%d\n",list[i].name,list[i].score);
     }
-    printf("%s\n",list[0].name);
+    //printf("%s\n",list[0].name);
     return size;
 }
 
