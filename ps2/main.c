@@ -53,6 +53,10 @@ int main()
     struct player list[10];
     int size=load(list);
     printf("%d\n",size);
+    for(int i=0;i<size;i++)
+    {
+        printf("%s\t%d\n",list[i].name,list[i].score);
+    }
     struct player player = {
         .name = "John",
         .score = 100
