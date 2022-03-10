@@ -104,7 +104,7 @@ bool update(struct game *game, int dy, int dx)
                     {
                         game->board[y][x]++;
                         game->board[y+1][x]=' ';
-                        game->score=game->score+pow(2,game->board[y][x]-'A'+1);
+                        game->score=game->score+(int)pow(2,game->board[y][x]-'A'+1);
                     }
                 }
             }
@@ -148,7 +148,7 @@ bool update(struct game *game, int dy, int dx)
                     {
                         game->board[y][x]++;
                         game->board[y-1][x]=' ';
-                        game->score=game->score+pow(2,game->board[y][x]-'A'+1);
+                        game->score=game->score+(int)pow(2,game->board[y][x]-'A'+1);
                     }
                 }
             }
@@ -195,7 +195,7 @@ bool update(struct game *game, int dy, int dx)
                     {
                         game->board[y][x]++;
                         game->board[y][x+1]=' ';
-                        game->score=game->score+pow(2,game->board[y][x]-'A'+1);
+                        game->score=game->score+(int)pow(2,game->board[y][x]-'A'+1);
                     }
                 }
             }
@@ -239,7 +239,7 @@ bool update(struct game *game, int dy, int dx)
                     {
                         game->board[y][x]++;
                         game->board[y][x-1]=' ';
-                        game->score=game->score+pow(2,game->board[y][x]-'A'+1);
+                        game->score=game->score+(int)pow(2,game->board[y][x]-'A'+1);
                     }
                 }
             }

@@ -45,7 +45,7 @@ int load(struct player list[])
             size++;
         }
     }
-    qsort(list,size,sizeof list[0],cmp);
+    qsort(list,(size_t)size,sizeof list[0],cmp);
     return size;
 }
 
@@ -61,7 +61,7 @@ bool save(const struct player list[], const int size)
     {
         p[i]=list[i];
     }
-    qsort(p,size,sizeof list[0],cmp);
+    qsort(p,(size_t)size,sizeof list[0],cmp);
     for(int i=0;i<size;i++)
     {
         if(i==size-1)
@@ -79,35 +79,35 @@ bool save(const struct player list[], const int size)
 bool add_player(struct player list[], int* size, const struct player player)
 {
     bool re=false;
-    int s=0;
-    int idx=0;
-    while(/*isalpha(list[idx].name)!=0&&*/idx<10)
-    {
-        s++;
-        idx++;
-    }
-    printf("Ahoj");
-    struct player p[s+1];
-    for(int i=0;i<s;i++)
-    {
-        p[i]=list[i];
-    }
-    p[s]=player;
-    qsort(p,s+1,sizeof list[0],cmp);
-    for(int i=0;i<s;i++)
-    {
-        if(list[i].score<=p[s].score)
-        {
-            re=true;
-        }
-    }
-    if(s<10)
-    {
-        s++;
-    }
-    for(int i=0;i<s;i++)
-    {
-        list[i]=p[i];
-    }
+    // int s=0;
+    // int idx=0;
+    // while(/*isalpha(list[idx].name)!=0&&*/idx<10)
+    // {
+    //     s++;
+    //     idx++;
+    // }
+    // printf("Ahoj");
+    // struct player p[s+1];
+    // for(int i=0;i<s;i++)
+    // {
+    //     p[i]=list[i];
+    // }
+    // p[s]=player;
+    // qsort(p,s+1,sizeof list[0],cmp);
+    // for(int i=0;i<s;i++)
+    // {
+    //     if(list[i].score<=p[s].score)
+    //     {
+    //         re=true;
+    //     }
+    // }
+    // if(s<10)
+    // {
+    //     s++;
+    // }
+    // for(int i=0;i<s;i++)
+    // {
+    //     list[i]=p[i];
+    // }
     return re;
 }

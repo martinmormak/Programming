@@ -16,19 +16,19 @@ $(OUTPUT): main.o k.o hof.o ui.o
 
 main.o: main.c
 	echo "Building object file main.o"
-	$(CC) $(CFLAGS) -c $^ $(LDLIBS) -o $@
+	$(CC) $(CFLAGS) -c -Wconversion $^ $(LDLIBS) -o $@
 
 k.o: k.c
 	echo "Building object file bmp.o"
-	$(CC) $(CFLAGS) -c $^ $(LDLIBS) -o $@
+	$(CC) $(CFLAGS) -c -Wconversion $^ $(LDLIBS) -o $@
 
 hof.o: hof.c
 	echo "Building object file playfair.o"
-	$(CC) $(CFLAGS) -c $^ $(LDLIBS) -o $@
+	$(CC) $(CFLAGS) -c -Wconversion $^ $(LDLIBS) -o $@
 
 ui.o: ui.c
 	echo "Building object file playfair.o"
-	$(CC) $(CFLAGS) -c $^ $(LDLIBS) -o $@
+	$(CC) $(CFLAGS) -c -Wconversion $^ $(LDLIBS) -o $@
 
 clean:
 	rm -rf *o $(OUTPUT) bin/*
