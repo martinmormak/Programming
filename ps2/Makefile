@@ -5,7 +5,7 @@ LDLIBS=-lm
 SOURCES=main.c k.c hof.c ui.c
 
 
-all: ps2
+all: ps2 codeanalysis
 
 codeanalysis: $(SOURCES)
 	cppcheck --enable=performance,unusedFunction --error-exitcode=1 k.c hof.c main.c ui.c

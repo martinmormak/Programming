@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 #include "hof.h"
 
@@ -23,14 +25,12 @@ int load(struct player list[])
     FILE* f=fopen("score","r");
     int size=-1;
     int idx=0;
-    //struct player p;
     if(f==NULL)
     {
         return -1;
     }
-    while(fscanf(f, "%20s %d", list[idx].name,&list[idx].score) != EOF)
+    while(fscanf(f, "%s %d", list[idx].name,&list[idx].score) != EOF)
     {
-        //printf("%s\n%d\n",list[idx].name,list[idx].score);
         idx++;
     }  
     fclose(f);
@@ -45,31 +45,69 @@ int load(struct player list[])
             size++;
         }
     }
-    // for(int i=0;i<idx;i++)
-    // {
-    //     for(int x=0;x<idx-1;x++)
-    //     {
-    //         if(list[x].score<=list[x+1].score)
-    //         {
-    //             p.name=list[x].name;
-    //             list[x].name=list[x+1].name;
-    //             list[x+1].name=p.name;
-    //             p.score=list[x].score;
-    //             list[x].score=list[x+1].score;
-    //             list[x+1].score=p.score;
-    //         }
-    //     }
-    // }
     qsort(list,size,sizeof list[0],cmp);
     return size;
 }
 
 bool save(const struct player list[], const int size)
 {
+    FILE* f=fopen("score","w");
+    struct player p[size];
+    if(f==NULL)
+    {
+        return false;
+    }
+    for(int i=0;i<size;i++)
+    {
+        p[i]=list[i];
+    }
+    qsort(p,size,sizeof list[0],cmp);
+    for(int i=0;i<size;i++)
+    {
+        if(i==size-1)
+        {
+            fprintf(f, "%s %d", p[i].name,p[i].score);
+        }
+        else
+        {
+            fprintf(f, "%s %d\n", p[i].name,p[i].score);
+        }
+    }
     return true;
 }
 
 bool add_player(struct player list[], int* size, const struct player player)
 {
-    return true;
+    bool re=false;
+    int s=0;
+    int idx=0;
+    while(/*isalpha(list[idx].name)!=0&&*/idx<10)
+    {
+        s++;
+        idx++;
+    }
+    printf("Ahoj");
+    struct player p[s+1];
+    for(int i=0;i<s;i++)
+    {
+        p[i]=list[i];
+    }
+    p[s]=player;
+    qsort(p,s+1,sizeof list[0],cmp);
+    for(int i=0;i<s;i++)
+    {
+        if(list[i].score<=p[s].score)
+        {
+            re=true;
+        }
+    }
+    if(s<10)
+    {
+        s++;
+    }
+    for(int i=0;i<s;i++)
+    {
+        list[i]=p[i];
+    }
+    return re;
 }

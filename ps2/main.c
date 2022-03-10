@@ -47,12 +47,13 @@ int main()
     // printf("%s\n", result ? "true" : "false");
 
     //write on the screen
-    // render(game);
+    render(game);
 
     //load from document
     struct player list[10];
     int size=load(list);
     printf("%d\n",size);
+    printf("\nload\n");
     for(int i=0;i<size;i++)
     {
         printf("%s\t%d\n",list[i].name,list[i].score);
@@ -62,7 +63,19 @@ int main()
         .score = 100
     };
     result = add_player(list, &size, player);
+    printf("%s\n", result ? "true" : "false");
+    printf("\nadd_player\n");
+    for(int i=0;i<size;i++)
+    {
+        printf("%s\t%d\n",list[i].name,list[i].score);
+    }
     result = save(list, size);
-    printf("%d\n",result);
+    printf("%s\n", result ? "true" : "false");
+    
+    //add letter
+    add_random_tile(&game);
+    
+    //write on the screen
+    render(game);
     return 0;
 }
