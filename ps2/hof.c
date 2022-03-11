@@ -48,6 +48,10 @@ int load(struct player list[])
     {
         qsort(list,(size_t)size,sizeof list[0],cmp);
     }
+    if(size>10)
+    {
+        size=10;
+    }
     fclose(f);
     return size;
 }
