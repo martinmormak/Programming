@@ -22,7 +22,7 @@ int cmp(const void *p1,const void *p2)
 
 int load(struct player list[])
 {
-    FILE* f=fopen(HOF_FILE,"r");
+    FILE* f=fopen(HOF_FILE,"rb");
     int size=-1;
     int idx=0;
     if(f==NULL)
@@ -44,14 +44,17 @@ int load(struct player list[])
             size++;
         }
     }
-    qsort(list,(size_t)size,sizeof list[0],cmp);
+    if(size>=1)
+    {
+        qsort(list,(size_t)size,sizeof list[0],cmp);
+    }
     fclose(f);
     return size;
 }
 
 bool save(const struct player list[], const int size)
 {
-    FILE* f=fopen(HOF_FILE,"w");
+    FILE* f=fopen(HOF_FILE,"wb");
     struct player p[size];
     if(f==NULL)
     {
@@ -94,7 +97,7 @@ bool add_player(struct player list[], int* size, const struct player player)
             re=true;
         }
     }
-    if(size==0)
+    if(s==0)
     {
         re=true;
     }

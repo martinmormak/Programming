@@ -62,9 +62,12 @@ int main()
         .name = "Manager",
         .score = 25
     };
+    if(size<0)
+    {
+        size=0;
+    }
     result = add_player(list, &size, player);
-    printf("%s\n", result ? "true" : "false");
-    printf("\nadd_player\n");
+    printf("\nadd_player: %s\n", result ? "true" : "false");
     for(int i=0;i<size;i++)
     {
         printf("%s\t%d\n",list[i].name,list[i].score);
