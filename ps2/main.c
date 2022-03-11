@@ -59,8 +59,8 @@ int main()
         printf("%s\t%d\n",list[i].name,list[i].score);
     }
     struct player player = {
-        .name = "John",
-        .score = 100
+        .name = "Manager",
+        .score = 25
     };
     result = add_player(list, &size, player);
     printf("%s\n", result ? "true" : "false");

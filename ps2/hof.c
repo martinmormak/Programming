@@ -85,6 +85,7 @@ bool add_player(struct player list[], int* size, const struct player player)
     {
         p[i]=list[i];
     }
+    qsort(p,(size_t)s,sizeof list[0],cmp);
     p[s]=player;
     for(int i=0;i<s;i++)
     {
@@ -93,17 +94,19 @@ bool add_player(struct player list[], int* size, const struct player player)
             re=true;
         }
     }
+    if(size==0)
+    {
+        re=true;
+    }
     qsort(p,(size_t)s+1,sizeof list[0],cmp);
     if(s<10)
     {
         s++;
     }
-    printf("%d\n",s);
     for(int i=0;i<s;i++)
     {
         list[i]=p[i];
     }
     *size=s;
-    printf("%d\n",re);
     return re;
 }
