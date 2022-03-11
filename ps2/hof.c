@@ -22,7 +22,7 @@ int cmp(const void *p1,const void *p2)
 
 int load(struct player list[])
 {
-    FILE* f=fopen("score","r");
+    FILE* f=fopen(HOF_FILE,"r");
     int size=-1;
     int idx=0;
     if(f==NULL)
@@ -79,35 +79,31 @@ bool save(const struct player list[], const int size)
 bool add_player(struct player list[], int* size, const struct player player)
 {
     bool re=false;
-    // int s=0;
-    // int idx=0;
-    // while(/*isalpha(list[idx].name)!=0&&*/idx<10)
-    // {
-    //     s++;
-    //     idx++;
-    // }
-    // printf("Ahoj");
-    // struct player p[s+1];
-    // for(int i=0;i<s;i++)
-    // {
-    //     p[i]=list[i];
-    // }
-    // p[s]=player;
-    // qsort(p,s+1,sizeof list[0],cmp);
-    // for(int i=0;i<s;i++)
-    // {
-    //     if(list[i].score<=p[s].score)
-    //     {
-    //         re=true;
-    //     }
-    // }
-    // if(s<10)
-    // {
-    //     s++;
-    // }
-    // for(int i=0;i<s;i++)
-    // {
-    //     list[i]=p[i];
-    // }
+    int s=*size;
+    struct player p[s+1];
+    for(int i=0;i<s;i++)
+    {
+        p[i]=list[i];
+    }
+    p[s]=player;
+    for(int i=0;i<s;i++)
+    {
+        if(list[i].score<=p[s].score)
+        {
+            re=true;
+        }
+    }
+    qsort(p,(size_t)s+1,sizeof list[0],cmp);
+    if(s<10)
+    {
+        s++;
+    }
+    printf("%d\n",s);
+    for(int i=0;i<s;i++)
+    {
+        list[i]=p[i];
+    }
+    *size=s;
+    printf("%d\n",re);
     return re;
 }
