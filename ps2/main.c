@@ -51,9 +51,15 @@ int main()
 
     //load from document
     struct player list[10];
+    /*int size=load(list);
+    printf("size:%d\n",size);
+    printf("\nload\n");*/
+    struct player hof [2] = {
+    {.score=  800, .name="Manager"},
+    {.score=  341, .name="Manager"}};
+    result = save(hof, 2);
     int size=load(list);
-    printf("%d\n",size);
-    printf("\nload\n");
+    printf("Ahoj %d\n",size);
     for(int i=0;i<size;i++)
     {
         printf("%s\t%d\n",list[i].name,list[i].score);
@@ -72,7 +78,7 @@ int main()
     {
         printf("%s\t%d\n",list[i].name,list[i].score);
     }
-    result = save(list, size);
+    //result = save(list, size);
     printf("%s\n", result ? "true" : "false");
     
     //add letter
