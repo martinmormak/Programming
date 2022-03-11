@@ -51,7 +51,7 @@ int load(struct player list[])
 
 bool save(const struct player list[], const int size)
 {
-    FILE* f=fopen("score","w");
+    FILE* f=fopen(HOF_FILE,"w");
     struct player p[size];
     if(f==NULL)
     {
