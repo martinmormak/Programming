@@ -29,7 +29,7 @@ int load(struct player list[])
     {
         return -1;
     }
-    while(fscanf(f, "%s %d", list[idx].name,&list[idx].score) != EOF)
+    while(fscanf(f, "%s"DELIMITER"%d\n", list[idx].name,&list[idx].score) != EOF)
     {
         idx++;
     }
@@ -69,11 +69,11 @@ bool save(const struct player list[], const int size)
     {
         if(i==size-1)
         {
-            fprintf(f, "%s %d", p[i].name,p[i].score);
+            fprintf(f, "%s%s%d", p[i].name,DELIMITER,p[i].score);
         }
         else
         {
-            fprintf(f, "%s %d\n", p[i].name,p[i].score);
+            fprintf(f, "%s%s%d\n", p[i].name,DELIMITER,p[i].score);
         }
     }
     return true;

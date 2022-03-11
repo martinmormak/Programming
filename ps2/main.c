@@ -60,7 +60,7 @@ int main()
     }
     struct player player = {
         .name = "Manager",
-        .score = 25
+        .score = 250
     };
     if(size<0)
     {
