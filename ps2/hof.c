@@ -32,8 +32,7 @@ int load(struct player list[])
     while(fscanf(f, "%s %d", list[idx].name,&list[idx].score) != EOF)
     {
         idx++;
-    }  
-    fclose(f);
+    }
     for(int i=0;i<idx;i++)
     {
         if(list[i].name!=NULL)
@@ -46,6 +45,7 @@ int load(struct player list[])
         }
     }
     qsort(list,(size_t)size,sizeof list[0],cmp);
+    fclose(f);
     return size;
 }
 
