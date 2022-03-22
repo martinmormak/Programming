@@ -2,18 +2,21 @@
 
 int main()
 {
-    unsigned long long number=0;
-    unsigned long long sum=0;
-    scanf("%lld",&number);
-    do
+    int hole=0;
+    float salaries=0;
+    scanf("%d %f",&hole,&salaries);
+    if(hole==0)
     {
-        sum=0;
-        do
+        for(int i=0;i<salaries;i++)
         {
-            sum=sum+number%10;
-            number=number/10;
-        }while(number>=1);
-        number=sum;
-    }while(sum>9);
-    printf("%lld\n",sum);
+            printf("%.7f\n",100/salaries);
+        }
+    }
+    else
+    {
+        for(int i=0;i<salaries;i++)
+        {
+            printf("%.7f\n",100/salaries);
+        }
+    }
 }
