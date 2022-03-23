@@ -4,8 +4,8 @@
 
 int main()
 {
-    clock_t ti;
-    ti = clock();
+    /*clock_t ti;
+    ti = clock();*/
     int p;
     float t;
     scanf("%d %f\n",&p,&t);
@@ -24,23 +24,41 @@ int main()
         }
     }
     min=min*-1;
-    min=min+(float)pow(10,-6);
     float vysledok=0;
-    do
+    float pvysledok=0;
+    int q;
+    for(int i=2;i>=-7;i--)
     {
-        vysledok=0;
-        for(int i=0;i<p;i++)
+        do
         {
-            vysledok=vysledok+(s[i]/(v[i]+min));
-        }
-        min=min+(float)pow(10,-6);
-        printf("%f\t%f\n",min,vysledok);
-    }while(t!=vysledok);
-    min=min-(float)pow(10,-6);
+            q=1;
+            min=min+(float)pow(10,i);
+            vysledok=0;
+            for(int x=0;x<p;x++)
+            {
+                vysledok=vysledok+(s[x]/(v[x]+min));
+            }
+            if(t==vysledok)
+            {
+                i=-8;
+                q=0;
+            }
+            if(t>vysledok)
+            {
+                min=min-(float)pow(10,i);
+                q=0;
+            }
+            else if(t>vysledok&&t<pvysledok)
+            {
+                q=0;
+            }
+            pvysledok=vysledok;
+        }while(q);
+    }
     printf("%f\n",min);
     
-    ti = clock() - ti;
+    /*ti = clock() - ti;
     double time_taken = ((double)ti)/CLOCKS_PER_SEC; // in seconds
   
-    printf("%f\n", time_taken);
+    printf("%f\n", time_taken);*/
 }
