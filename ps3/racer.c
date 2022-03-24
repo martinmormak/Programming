@@ -23,39 +23,33 @@ int main()
             min=v[i];
         }
     }
-    min=min*-1;
+    min=min*-1+(float)pow(10,-6);
+    float max=1000000;
+    float middle=(max+min)/2;
     float vysledok=0;
-    float pvysledok=0;
-    int q;
-    for(int i=2;i>=-7;i--)
+    for(int i=0;i<1000;i++)
     {
-        do
+        vysledok=0;
+        for(int x=0;x<p;x++)
         {
-            q=1;
-            min=min+(float)pow(10,i);
-            vysledok=0;
-            for(int x=0;x<p;x++)
-            {
-                vysledok=vysledok+(s[x]/(v[x]+min));
-            }
-            if(t==vysledok)
-            {
-                i=-8;
-                q=0;
-            }
-            if(t>vysledok)
-            {
-                min=min-(float)pow(10,i);
-                q=0;
-            }
-            else if(t>vysledok&&t<pvysledok)
-            {
-                q=0;
-            }
-            pvysledok=vysledok;
-        }while(q);
+            vysledok=vysledok+(s[x]/(v[x]+middle));
+        }
+        if(t==vysledok)
+        {
+            i=1000000;
+        }
+        if(t>vysledok)
+        {
+            max=middle;
+            middle=(max+min)/2;
+        }
+        else if(t<vysledok)
+        {
+            min=middle;
+            middle=(max+min)/2;
+        }
     }
-    printf("%f\n",min);
+    printf("%f\n",middle);
     
     /*ti = clock() - ti;
     double time_taken = ((double)ti)/CLOCKS_PER_SEC; // in seconds
