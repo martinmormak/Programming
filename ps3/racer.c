@@ -24,10 +24,11 @@ int main()
         }
     }
     min=min*-1+(float)pow(10,-6);
+    //int mid;
     float max=1000000;
     float middle=(max+min)/2;
     float vysledok=0;
-    for(int i=0;i<1000;i++)
+    for(int i=0;i<1000000;i++)
     {
         vysledok=0;
         for(int x=0;x<p;x++)
