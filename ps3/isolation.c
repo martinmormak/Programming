@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-int cmp(const void *n1,const void *n2)
-{
-    return ( *(int*)n1 - *(int*)n2 );
-}
-
 int main()
 {
     int n;
