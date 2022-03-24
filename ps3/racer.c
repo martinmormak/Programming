@@ -50,7 +50,7 @@ int main()
             middle=(max+min)/2;
         }
     }
-    printf("%f\n",middle);
+    printf("%.6f\n",middle);
     
     /*ti = clock() - ti;
     double time_taken = ((double)ti)/CLOCKS_PER_SEC; // in seconds
