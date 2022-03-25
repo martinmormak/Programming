@@ -4,8 +4,8 @@
 
 int main()
 {
-    clock_t ti;
-    ti = clock();
+    /*clock_t ti;
+    ti = clock();*/
     int p;
     double t;
     scanf("%d %lf\n",&p,&t);
@@ -28,20 +28,16 @@ int main()
     double max=2000;
     double middle=(max+min)/2;
     double vysledok=0;
-    for(unsigned long long i=0;i<999999999999999999;i++)
+    for(unsigned long long i=0;i<9999;i++)
     {
         vysledok=0;
-        if(clock() - ti>1900000)
-        {
-            break;
-        }
         for(int x=0;x<p;x++)
         {
             vysledok=vysledok+(s[x]/(v[x]+middle));
         }
         if(t==vysledok)
         {
-            i=999999999999999999;
+            i=9999;
         }
         if(t>vysledok)
         {

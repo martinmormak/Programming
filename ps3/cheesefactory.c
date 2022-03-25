@@ -6,7 +6,6 @@ struct hol{
     double x;
     double y;
     double z;
-    double v;
 };
 
 int main()
@@ -25,8 +24,8 @@ int main()
         h[i].x=h[i].x/1000;
         h[i].y=h[i].y/1000;
         h[i].z=h[i].z/1000;*/
-        h[i].v=pi*4/3*pow(h[i].r,3);
-        objem=objem-h[i].v;
+        //h[i].v=pi*4/3*pow(h[i].r,3);
+        objem=objem-pi*4/3*pow(h[i].r,3);;
     }
     double c=0;
     kus=objem/salaries;
@@ -36,38 +35,49 @@ int main()
         double max=100000;
         double pObjem;
         double mid;
+        double m;
+        double vyska;
         while(max-min>0.0000001)
         {
             mid=(max+min)/2;
+            m=mid;
             pObjem=pow(100000,2)*mid;
             for(int x=0;x<hole;x++)
             {
-                if(h[x].z+h[x].r<=mid)
+                if(h[x].z+h[x].r<mid)
                 {
-                    pObjem=pObjem-h[x].v;
+                    pObjem=pObjem-pi*4/3*pow(h[x].r,3);
                 }
-                else if(h[x].z-h[x].r<=mid)
+                else if(h[x].z-h[x].r<mid)
                 {
-                    double vyska=mid-h[x].z;
+                    vyska=mid-h[x].z;
                     double cObjem=/*((pi*pow(vyska,2))/3)*(3*h[x].r-vyska)*//*pi*pow(vyska,2)*(h[x].r-vyska/3)*/pi*(vyska-1/3+pow(1-vyska,3)/3);
-                    pObjem=pObjem-cObjem;
+                    //printf("%lf\t%lf\n",cObjem,vyska);
+                    pObjem=pObjem-cObjem/*(pi*(mid-h[x].z-1/3+pow(1-mid+h[x].z,3)/3))*/;
                 }
             }
-            if(i*kus>pObjem)
+            if(i*kus<pObjem)
             {
-                min=mid;
+                max=m;
+                //printf("max\t%lf\t%lf\t%lf\t%lf\t%lf\n",i*kus,pObjem,i*kus-pObjem,max,min);
+            }
+            else if(i*kus==pObjem)
+            {
+                min=m;
+                max=m;
             }
             else
             {
-                max=mid;
+                min=m;
+                //printf("min\t%lf\t%lf\t%lf\t%lf\t%lf\n",i*kus,pObjem,i*kus-pObjem,max,min);
             }
         }
         mid=(max+min)/2;
         //double rez=(max+min)/2;
         //printf("%lf\t%lf\n",kus,pObjem);
         //printf("%lf\t%lf\n",min,max);
-        printf("%lf\n",(mid-c)/1000);
+        printf("%.6lf\n",(mid-c)/1000);
         c=mid;
     }
-    printf("%lf\n",(100000-c)/1000);
+    printf("%.6lf\n",(100000-c)/1000);
 }
