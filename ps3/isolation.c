@@ -49,34 +49,8 @@ int main()
             }
         }
     }
-    /*for(int z=0;z<n;z++)
-    {
-        printf("%lld\n",tree[z][0][0]);
-        for(int y=1;y<k;y++)
-        {
-            for(int x=0;x<2*y;x++)
-            {
-                printf("%lld\t",tree[z][y][x]);
-            }
-            printf("\n");
-        }
-        printf("\n\n\n\n");
-    }*/
     for(int z=0;z<n;z++)
     {
-        /*for(int q=0;q<=z;q++)
-        {
-            printf("%lld\n",tree[q][0][0]);
-            for(int y=1;y<k;y++)
-            {
-                for(int x=0;x<2*y;x++)
-                {
-                    printf("%lld\t",tree[q][y][x]);
-                }
-                printf("\n");
-            }
-            printf("\n\n\n\n");
-        }*/
         for(int i=0;i<k;i++)
         {
             int a=0;
@@ -87,16 +61,6 @@ int main()
                 {
                     tree[z][y][o]=array[z][i];
                     y=k;
-                    /*printf("%lld\n",tree[z-1][0][0]);
-                    for(int y=1;y<k;y++)
-                    {
-                        for(int x=0;x<2*y;x++)
-                        {
-                            printf("%lld\t",tree[z-1][y][x]);
-                        }
-                        printf("\n");
-                    }
-                    printf("\n\n\n\n");*/
                 }
                 else if(tree[z][y][o]<array[z][i])
                 {
@@ -110,19 +74,6 @@ int main()
                 }
             }
         }
-        /*for(int q=0;q<=z;q++)
-        {
-            printf("%lld\n",tree[q][0][0]);
-            for(int y=1;y<k;y++)
-            {
-                for(int x=0;x<2*y;x++)
-                {
-                    printf("%lld\t",tree[q][y][x]);
-                }
-                printf("\n");
-            }
-            printf("\n\n\n\n");
-        }*/
     }
     for(int z=0;z<n;z++)
     {
@@ -165,7 +116,6 @@ int main()
             c=0;
             if(tree[z][0][0]!=tree[q][0][0])
             {
-                //printf("%lld\t%lld\n",tree[z][0][0],tree[q][0][0]);
                 c=1;
             }
             for(int y=1;y<k;y++)
@@ -174,7 +124,6 @@ int main()
                 {
                     if(tree[z][y][x]!=tree[q][y][x])
                     {
-                        //printf("%lld\t%lld\n",tree[z][y][x],tree[q][y][x]);
                         c=1;
                     }
                 }

@@ -25,7 +25,7 @@ int main()
     }
     min=min*-1+(float)pow(10,-6);
     //int mid;
-    float max=1000;
+    float max=2000;
     float middle=(max+min)/2;
     float vysledok=0;
     for(int i=0;i<890000;i++)
