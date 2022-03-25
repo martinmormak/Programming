@@ -7,15 +7,15 @@ int main()
     clock_t ti;
     ti = clock();
     int p;
-    float t;
-    scanf("%d %f\n",&p,&t);
-    float v[p];
-    float s[p];
+    double t;
+    scanf("%d %lf\n",&p,&t);
+    double v[p];
+    double s[p];
     for(int i=0;i<p;i++)
     {
-        scanf("%f %f\n",&s[i],&v[i]);
+        scanf("%lf %lf\n",&s[i],&v[i]);
     }
-    float min=v[0];
+    double min=v[0];
     for(int i=1;i<p;i++)
     {
         if(min>v[i])
@@ -25,13 +25,13 @@ int main()
     }
     min=min*-1+(float)pow(10,-6);
     //int mid;
-    float max=2000;
-    float middle=(max+min)/2;
-    float vysledok=0;
+    double max=2000;
+    double middle=(max+min)/2;
+    double vysledok=0;
     for(unsigned long long i=0;i<999999999999999999;i++)
     {
         vysledok=0;
-        if(clock() - ti>1999900)
+        if(clock() - ti>1900000)
         {
             break;
         }

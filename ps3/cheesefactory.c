@@ -42,14 +42,14 @@ int main()
             pObjem=pow(100000,2)*mid;
             for(int x=0;x<hole;x++)
             {
-                if(h[x].z+h[x].r<mid)
+                if(h[x].z+h[x].r<=mid)
                 {
                     pObjem=pObjem-h[x].v;
                 }
                 else if(h[x].z-h[x].r<=mid)
                 {
                     double vyska=mid-h[x].z;
-                    double cObjem=/*((pi*pow(vyska,2))/3)*(3*h[x].r-vyska)*/pi*pow(vyska,2)*(h[x].r-vyska/3);
+                    double cObjem=/*((pi*pow(vyska,2))/3)*(3*h[x].r-vyska)*//*pi*pow(vyska,2)*(h[x].r-vyska/3)*/pi*(vyska-1/3+pow(1-vyska,3)/3);
                     pObjem=pObjem-cObjem;
                 }
             }
