@@ -28,7 +28,7 @@ int main()
     float max=2000;
     float middle=(max+min)/2;
     float vysledok=0;
-    for(int i=0;i<890000;i++)
+    for(unsigned long long i=0;i<999999999999999999;i++)
     {
         vysledok=0;
         if(clock() - ti>1999900)
@@ -41,7 +41,7 @@ int main()
         }
         if(t==vysledok)
         {
-            i=1000000;
+            i=999999999999999999;
         }
         if(t>vysledok)
         {
