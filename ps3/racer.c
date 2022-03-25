@@ -4,8 +4,8 @@
 
 int main()
 {
-    /*clock_t ti;
-    ti = clock();*/
+    clock_t ti;
+    ti = clock();
     int p;
     float t;
     scanf("%d %f\n",&p,&t);
@@ -25,12 +25,16 @@ int main()
     }
     min=min*-1+(float)pow(10,-6);
     //int mid;
-    float max=1000000;
+    float max=1000;
     float middle=(max+min)/2;
     float vysledok=0;
-    for(int i=0;i<1000000;i++)
+    for(int i=0;i<890000;i++)
     {
         vysledok=0;
+        if(clock() - ti>1999900)
+        {
+            break;
+        }
         for(int x=0;x<p;x++)
         {
             vysledok=vysledok+(s[x]/(v[x]+middle));
@@ -55,5 +59,5 @@ int main()
     /*ti = clock() - ti;
     double time_taken = ((double)ti)/CLOCKS_PER_SEC; // in seconds
   
-    printf("%f\n", time_taken);*/
+    printf("%ld\t%f\n",ti,time_taken);*/
 }
