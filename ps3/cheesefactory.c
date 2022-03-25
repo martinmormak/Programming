@@ -46,14 +46,15 @@ int main()
             {
                 if(h[x].z+h[x].r<mid)
                 {
-                    pObjem=pObjem-pi*4/3*pow(h[x].r,3);
+                    pObjem=pObjem-pi*4/3*h[x].r*h[x].r*h[x].r;
                 }
                 else if(h[x].z-h[x].r<mid)
                 {
                     vyska=mid-h[x].z;
-                    double cObjem=/*((pi*pow(vyska,2))/3)*(3*h[x].r-vyska)*//*pi*pow(vyska,2)*(h[x].r-vyska/3)*/pi*(vyska-1/3+pow(1-vyska,3)/3);
-                    //printf("%lf\t%lf\n",cObjem,vyska);
-                    pObjem=pObjem-cObjem/*(pi*(mid-h[x].z-1/3+pow(1-mid+h[x].z,3)/3))*/;
+				    double cObjem=h[x].r*h[x].r*vyska-vyska*vyska*vyska/3.0+2.0/3*h[x].r*h[x].r*h[x].r;
+                    //double cObjem=1/3*vyska*vyska*(3*h[x].r-vyska);
+				    cObjem=cObjem*pi;
+				    pObjem=pObjem-cObjem;
                 }
             }
             if(i*kus<pObjem)
