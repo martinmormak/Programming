@@ -35,9 +35,10 @@ int main()
         double min=c;
         double max=100000;
         double pObjem;
+        double mid;
         while(max-min>0.0000001)
         {
-            double mid=(max+min)/2;
+            mid=(max+min)/2;
             pObjem=pow(100000,2)*mid;
             for(int x=0;x<hole;x++)
             {
@@ -48,7 +49,7 @@ int main()
                 else if(h[x].z-h[x].r<=mid)
                 {
                     double vyska=mid-h[x].z;
-                    double cObjem=/*((pi*pow(vyska,2))/3)*(3*h[x].r-vyska)*/pi*vyska*(h[x].r-vyska/3);
+                    double cObjem=/*((pi*pow(vyska,2))/3)*(3*h[x].r-vyska)*/pi*pow(vyska,2)*(h[x].r-vyska/3);
                     pObjem=pObjem-cObjem;
                 }
             }
@@ -61,11 +62,12 @@ int main()
                 max=mid;
             }
         }
-        double rez=(max+min)/2;
-        /*printf("%lf\t%lf\n",kus,pObjem);
-        printf("%lf\t%lf\n",min,max);*/
-        printf("%lf\n",(rez-c)/1000);
-        c=rez;
+        mid=(max+min)/2;
+        //double rez=(max+min)/2;
+        //printf("%lf\t%lf\n",kus,pObjem);
+        //printf("%lf\t%lf\n",min,max);
+        printf("%lf\n",(mid-c)/1000);
+        c=mid;
     }
     printf("%lf\n",(100000-c)/1000);
 }
