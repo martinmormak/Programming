@@ -10,6 +10,7 @@ struct bmp_image* read_bmp(FILE* stream)
     struct bmp_image *image=malloc(sizeof(struct bmp_image));
     if(image==NULL)
     {
+        free(image);
         return NULL;
     }
     image->header=read_bmp_header(stream);
@@ -17,11 +18,13 @@ struct bmp_image* read_bmp(FILE* stream)
     if(image->header==NULL)
     {
         printf("Error: This is not a BMP file.\n");
+        free(image);
         return NULL;
     }
     else if(&head->size==NULL||&head->height==NULL||&head->width==NULL)
     {
         printf("Error: Corrupted BMP file.\n");
+        free(image);
         return NULL;
     }
     struct bmp_header header;
@@ -35,7 +38,7 @@ struct bmp_image* read_bmp(FILE* stream)
     image->header->width=header.width;
     image->header->height=header.height;
     image->header->image_size=header.image_size;
-    printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
+    //printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
     image->data=read_data(stream,head);
     image->header->size=header.size;
     image->header->width=header.width;
@@ -59,13 +62,14 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     }
     if(fwrite(&image->header,sizeof(struct bmp_header),1,f)!=1)
     {
+        fclose(f);
         return false;
     }
     image->header->size=header.size;
     image->header->width=header.width;
     image->header->height=header.height;
     image->header->image_size=header.image_size;
-    printf("%d\n",image->header->image_size);
+    //printf("%d\n",image->header->image_size);
     fseek(f,54,SEEK_SET);
     fwrite(image->data,sizeof(char),image->header->image_size,f);
     /*if(fwrite(image->data,sizeof(char),image->header->image_size,f)!=1)
@@ -99,33 +103,32 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
 
 struct bmp_header* read_bmp_header(FILE* stream)
 {
-    struct bmp_header header;
+    struct bmp_header *header=malloc(sizeof(struct bmp_header));
     FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
     {
+        free(header);
         return NULL;
     }
     fseek(f,0,SEEK_SET);
-    fread(&header.type,sizeof(uint16_t),1,f);
-    fread(&header.size,sizeof(uint32_t),1,f);
-    fread(&header.reserved1,sizeof(uint16_t),1,f);
-    fread(&header.reserved2,sizeof(uint16_t),1,f);
-    fread(&header.offset,sizeof(uint32_t),1,f);
-    fread(&header.dib_size,sizeof(uint32_t),1,f);
-    fread(&header.width,sizeof(uint32_t),1,f);
-    fread(&header.height,sizeof(uint32_t),1,f);
-    fread(&header.planes,sizeof(uint16_t),1,f);
-    fread(&header.bpp,sizeof(uint16_t),1,f);
-    fread(&header.compression,sizeof(uint32_t),1,f);
-    fread(&header.image_size,sizeof(uint32_t),1,f);
-    fread(&header.x_ppm,sizeof(uint32_t),1,f);
-    fread(&header.y_ppm,sizeof(uint32_t),1,f);
-    fread(&header.num_colors,sizeof(uint32_t),1,f);
-    fread(&header.important_colors,sizeof(uint32_t),1,f);
-    struct bmp_header *head=malloc(sizeof(struct bmp_header));
-    head=&header;
+    fread(&header->type,sizeof(uint16_t),1,f);
+    fread(&header->size,sizeof(uint32_t),1,f);
+    fread(&header->reserved1,sizeof(uint16_t),1,f);
+    fread(&header->reserved2,sizeof(uint16_t),1,f);
+    fread(&header->offset,sizeof(uint32_t),1,f);
+    fread(&header->dib_size,sizeof(uint32_t),1,f);
+    fread(&header->width,sizeof(uint32_t),1,f);
+    fread(&header->height,sizeof(uint32_t),1,f);
+    fread(&header->planes,sizeof(uint16_t),1,f);
+    fread(&header->bpp,sizeof(uint16_t),1,f);
+    fread(&header->compression,sizeof(uint32_t),1,f);
+    fread(&header->image_size,sizeof(uint32_t),1,f);
+    fread(&header->x_ppm,sizeof(uint32_t),1,f);
+    fread(&header->y_ppm,sizeof(uint32_t),1,f);
+    fread(&header->num_colors,sizeof(uint32_t),1,f);
+    fread(&header->important_colors,sizeof(uint32_t),1,f);
     fclose(f);
-    return head;
+    return header;
 }
 
 struct pixel* read_data(FILE* stream, const struct bmp_header* header)
@@ -134,10 +137,11 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
     {
+        free(pixel);
         return NULL;
     }
     fseek(f,54,SEEK_SET);
-    fread(pixel, sizeof(char),header->image_size, f);
+    fread(pixel, sizeof(char),header->image_size,f);
     fclose(f);
     return pixel;
 }
