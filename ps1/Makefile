@@ -12,7 +12,7 @@ codeanalysis: $(SOURCES)
 
 $(OUTPUT): main.o bmp.o playfair.o
 	echo "Running compilation"
-	$(CC) $(CFLAGS) main.o bmp.o playfair.o $(LDLIBS) -o $(OUTPUT)
+	$(CC) $(CFLAGS) $^ $(LDLIBS) -o $(OUTPUT)
 
 main.o: main.c
 	echo "Building object file main.o"
