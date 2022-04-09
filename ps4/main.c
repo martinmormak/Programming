@@ -8,7 +8,7 @@
 
 int main()
 {
-    FILE* stream=(FILE*)"assets/adventurer.bmp";
+    FILE* stream=(FILE*)"assets/prva.akcia.bmp";
     struct bmp_image* image=read_bmp(stream);
     /*uint32_t size=image->header->height*image->header->width;
     for(int i=(int)(size);i>0;i--)
@@ -28,7 +28,7 @@ int main()
     const uint32_t start_x=0;
     const uint32_t height=0;
     const uint32_t width=0;
-    const char* colors_to_keep="rb";
+    const char* colors_to_keep="rgb";
     scale(image, factor);
     crop(image, start_y, start_x, height, width);
     extract(image, colors_to_keep);

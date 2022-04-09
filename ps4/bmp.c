@@ -44,10 +44,11 @@ struct bmp_image* read_bmp(FILE* stream)
     image->header->image_size=header.image_size;
     //printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
     image->data=read_data(stream,head);
-    /*if(image->data==NULL)
+    if(image->data==NULL)
     {
-        printf("DATA\n");
-    }*/
+        free(image);
+        return NULL;
+    }
     image->header->size=header.size;
     image->header->width=header.width;
     image->header->height=header.height;
