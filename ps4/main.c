@@ -8,8 +8,8 @@
 
 int main()
 {
-    //FILE* stream=(FILE*)"assets/prva.akcia.bmp";
-    FILE* stream=(FILE*)"file.bmp";
+    FILE* stream=(FILE*)"assets/adventurer.bmp";
+    //FILE* stream=(FILE*)"file.bmp";
     struct bmp_image* image=read_bmp(stream);
     /*uint32_t size=image->header->height*image->header->width;
     for(int i=(int)(size);i>0;i--)
