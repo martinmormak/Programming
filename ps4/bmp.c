@@ -7,6 +7,14 @@
 
 struct bmp_image* read_bmp(FILE* stream)
 {
+    if(stream==NULL)
+    {
+        return NULL;
+    }
+    if(stream==stdin)
+    {
+        return NULL;
+    }
     struct bmp_image *image=malloc(sizeof(struct bmp_image));
     if(image==NULL)
     {
@@ -48,6 +56,10 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     {
         return NULL;
     }
+    if(stream==stdin)
+    {
+        return NULL;
+    }
     if(image==NULL)
     {
         return NULL;
@@ -57,31 +69,25 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     header.height=image->header->height;
     header.width=image->header->width;
     header.image_size=image->header->image_size;
-    FILE* f=fopen((char*)stream,"w");
-    if(f==NULL)
-    {
-        return false;
-    }
-    fseek(f,54,SEEK_SET);
-    fwrite(image->data,sizeof(char),image->header->image_size,f);
-    fseek(f,0,SEEK_SET);
-    fwrite("BM",sizeof(uint16_t),1,f);
-    fwrite(&header.size,sizeof(uint32_t),1,f);
+    fseek(stream,54,SEEK_SET);
+    fwrite(image->data,sizeof(char),image->header->image_size,stream);
+    fseek(stream,0,SEEK_SET);
+    fwrite("BM",sizeof(uint16_t),1,stream);
+    fwrite(&header.size,sizeof(uint32_t),1,stream);
     int32_t reserved = 0x0000;
-    fwrite(&reserved,sizeof(uint16_t),1,f);
-    fwrite(&reserved,sizeof(uint16_t),1,f);
+    fwrite(&reserved,sizeof(uint16_t),1,stream);
+    fwrite(&reserved,sizeof(uint16_t),1,stream);
     int32_t offset=0x00000036;
-    fwrite(&offset,sizeof(uint32_t),1,f);
+    fwrite(&offset,sizeof(uint32_t),1,stream);
     int32_t dib_size=0x00000028;
-    fwrite(&dib_size,sizeof(uint32_t),1,f);
-    fwrite(&header.width,sizeof(uint32_t),1,f);
-    fwrite(&header.height,sizeof(uint32_t),1,f);
+    fwrite(&dib_size,sizeof(uint32_t),1,stream);
+    fwrite(&header.width,sizeof(uint32_t),1,stream);
+    fwrite(&header.height,sizeof(uint32_t),1,stream);
     int32_t planes=0x0001;
-    fwrite(&planes,sizeof(uint16_t),1,f);
+    fwrite(&planes,sizeof(uint16_t),1,stream);
     int32_t bpp=0x0018;
-    fwrite(&bpp,sizeof(uint16_t),1,f);
-    fwrite(&reserved,sizeof(uint32_t),1,f);
-    fclose(f);
+    fwrite(&bpp,sizeof(uint16_t),1,stream);
+    fwrite(&reserved,sizeof(uint32_t),1,stream);
     return true;
 }
 
@@ -100,9 +106,9 @@ struct bmp_header* read_bmp_header(FILE* stream)
     {
         return NULL;
     }*/
-    struct bmp_header *header=malloc(55);
+    struct bmp_header *header=malloc(sizeof(struct bmp_header));
     fseek(stream,0,SEEK_SET);
-    fread(header,54,1,stream);
+    fread(header,sizeof(struct bmp_header),1,stream);
     if(header->type!=19778)
     {
         free(header);
@@ -115,6 +121,10 @@ struct bmp_header* read_bmp_header(FILE* stream)
 struct pixel* read_data(FILE* stream, const struct bmp_header* header)
 {
     if(stream==NULL)
+    {
+        return NULL;
+    }
+    if(stream==stdin)
     {
         return NULL;
     }

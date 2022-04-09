@@ -10,8 +10,13 @@ int main()
 {
     //FILE* stream=(FILE*)"assets/adventurer.bmp";
     //FILE* stream=(FILE*)"file.bmp";
-    FILE* stream=(FILE*)"skuska.bmp";
+    FILE* stream=fopen("skuska.bmp","rb");
+    if(stream==NULL)
+    {
+        return false;
+    }
     struct bmp_image* image=read_bmp(stream);
+    fclose(stream);
     /*uint32_t size=image->header->height*image->header->width;
     for(int i=(int)(size);i>0;i--)
     {
@@ -21,44 +26,66 @@ int main()
     // //printf("%d\t%d\t%d\n",image->header->size,image->header->width,image->header->height);
     struct bmp_image* img;
     img=rotate_right(image);
-    stream=(FILE*)"save3.bmp";
+    stream=fopen("save3.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
     printf("%d\n",write_bmp(stream,img));
     free(img);
+    fclose(stream);
     struct bmp_image* img2;
     img2=rotate_left(image);
-    stream=(FILE*)"save4.bmp";
+    stream=fopen("save4.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
     printf("%d\n",write_bmp(stream,img2));
     free(img2);
+    fclose(stream);
     struct bmp_image* img3;
     img3=flip_horizontally(image);
-    stream=(FILE*)"save1.bmp";
+    stream=fopen("save1.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
     printf("%d\n",write_bmp(stream,img3));
     free(img3);
+    fclose(stream);
     struct bmp_image* img4;
     img4=flip_vertically(image);
-    stream=(FILE*)"save2.bmp";
-    printf("Ahoj");
+    stream=fopen("save2.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
     printf("%d\n",write_bmp(stream,img4));
     free(img4);
-    // printf("Ahoj");
-    // float factor=1;
-    // const uint32_t start_y=0;
-    // const uint32_t start_x=0;
-    // const uint32_t height=0;
-    // const uint32_t width=0;
-    // const char* colors_to_keep="rgb";
-    // printf("Ahoj");
-    // struct bmp_image* img5;
-    // img5=scale(image, factor);
-    // free(img5);
-    // struct bmp_image* img6;
-    // img6=crop(image, start_y, start_x, height, width);
-    // free(img6);
-    // struct bmp_image* img7;
-    // img7=extract(image, colors_to_keep);
-    // stream=(FILE*)"save5.bmp";
-    // printf("%d\n",write_bmp(stream,img7));
-    // free(img7);
-    // free_bmp_image(image);
+    fclose(stream);
+    float factor=1;
+    const uint32_t start_y=0;
+    const uint32_t start_x=0;
+    const uint32_t height=0;
+    const uint32_t width=0;
+    const char* colors_to_keep="rgb";
+    struct bmp_image* img5;
+    img5=scale(image, factor);
+    free(img5);
+    struct bmp_image* img6;
+    img6=crop(image, start_y, start_x, height, width);
+    free(img6);
+    struct bmp_image* img7;
+    img7=extract(image, colors_to_keep);
+    stream=fopen("save5.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
+    //printf("%d\n",write_bmp(stream,img7));
+    free(img7);
+    fclose(stream);
+    free_bmp_image(image);
     return 0;
 }
