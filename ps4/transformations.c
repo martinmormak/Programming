@@ -93,6 +93,9 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
     memcpy(header,image->header,54);
     unsigned char *bgr=malloc(image->header->image_size);
     unsigned char *nbgr=malloc(image->header->image_size);
+    uint32_t save=header->width;
+    header->width=header->height;
+    header->height=save;
     memcpy(bgr,image->data,image->header->image_size);
     memcpy(nbgr,image->data,image->header->image_size);
     /*for(int i=0;i<image->header->image_size;i++)
@@ -131,6 +134,9 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
     memcpy(header,image->header,54);
     unsigned char *bgr=malloc(image->header->image_size);
     unsigned char *nbgr=malloc(image->header->image_size);
+    uint32_t save=header->width;
+    header->width=header->height;
+    header->height=save;
     memcpy(bgr,image->data,image->header->image_size);
     memcpy(nbgr,image->data,image->header->image_size);
     /*for(int i=0;i<image->header->image_size;i++)
