@@ -14,6 +14,10 @@ struct bmp_image* read_bmp(FILE* stream)
         return NULL;
     }
     image->header=read_bmp_header(stream);
+    /*if(image->header==NULL)
+    {
+        printf("HEADER\n");
+    }*/
     struct bmp_header *head=image->header;
     if(image->header==NULL)
     {
@@ -40,6 +44,10 @@ struct bmp_image* read_bmp(FILE* stream)
     image->header->image_size=header.image_size;
     //printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
     image->data=read_data(stream,head);
+    /*if(image->data==NULL)
+    {
+        printf("DATA\n");
+    }*/
     image->header->size=header.size;
     image->header->width=header.width;
     image->header->height=header.height;
@@ -50,6 +58,14 @@ struct bmp_image* read_bmp(FILE* stream)
 
 bool write_bmp(FILE* stream, const struct bmp_image* image)
 {
+    if(stream==NULL)
+    {
+        return NULL;
+    }
+    if(image==NULL)
+    {
+        return NULL;
+    }
     struct bmp_header header;
     header.size=image->header->size;
     header.height=image->header->height;
@@ -107,7 +123,8 @@ struct bmp_header* read_bmp_header(FILE* stream)
     {
         return NULL;
     }
-    struct bmp_header *header=malloc(sizeof(struct bmp_header));
+    //struct bmp_header *header=malloc(sizeof(struct bmp_header));
+    unsigned char *header=(unsigned char*)malloc(55);
     FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
     {
@@ -115,7 +132,8 @@ struct bmp_header* read_bmp_header(FILE* stream)
         return NULL;
     }
     fseek(f,0,SEEK_SET);
-    fread(&header->type,sizeof(uint16_t),1,f);
+    fread(header,54,1,f);
+    /*fread(&header->type,sizeof(uint16_t),1,f);
     fread(&header->size,sizeof(uint32_t),1,f);
     fread(&header->reserved1,sizeof(uint16_t),1,f);
     fread(&header->reserved2,sizeof(uint16_t),1,f);
@@ -130,14 +148,18 @@ struct bmp_header* read_bmp_header(FILE* stream)
     fread(&header->x_ppm,sizeof(uint32_t),1,f);
     fread(&header->y_ppm,sizeof(uint32_t),1,f);
     fread(&header->num_colors,sizeof(uint32_t),1,f);
-    fread(&header->important_colors,sizeof(uint32_t),1,f);
+    fread(&header->important_colors,sizeof(uint32_t),1,f);*/
     fclose(f);
-    return header;
+    return (struct bmp_header*) header;
 }
 
 struct pixel* read_data(FILE* stream, const struct bmp_header* header)
 {
     if(stream==NULL)
+    {
+        return NULL;
+    }
+    if(header==NULL)
     {
         return NULL;
     }
@@ -166,9 +188,9 @@ void free_bmp_image(struct bmp_image* image)
     {
         if (image->data != NULL)
         {
-            free (image->data);
+            free(image->data);
         }
-        free (image);
+        free(image);
     }
     return;
 }

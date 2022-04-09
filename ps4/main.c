@@ -28,10 +28,12 @@ int main()
     const uint32_t start_x=0;
     const uint32_t height=0;
     const uint32_t width=0;
-    const char* colors_to_keep="rgb";
+    const char* colors_to_keep="rb";
     scale(image, factor);
     crop(image, start_y, start_x, height, width);
     extract(image, colors_to_keep);
+    stream=(FILE*)"save_flip.bmp";
+    printf("%d\n",write_bmp(stream,image));
     free_bmp_image(image);
     return 0;
 }
