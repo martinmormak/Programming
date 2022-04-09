@@ -91,22 +91,25 @@ struct bmp_header* read_bmp_header(FILE* stream)
     {
         return NULL;
     }
-    FILE* f=fopen((char*)stream,"rb");
+    if(stream==stdin)
+    {
+        return NULL;
+    }
+    /*FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
     {
         return NULL;
-    }
-    unsigned char *header=(unsigned char*)malloc(55);
-    if (!header)
+    }*/
+    struct bmp_header *header=malloc(55);
+    fseek(stream,0,SEEK_SET);
+    fread(header,54,1,stream);
+    if(header->type!=19778)
     {
         free(header);
-        fclose(f);
         return NULL;
     }
-    fseek(f,0,SEEK_SET);
-    fread(header,54,1,f);
-    fclose(f);
-    return (struct bmp_header*) header;
+    /*fclose(f);*/
+    return header;
 }
 
 struct pixel* read_data(FILE* stream, const struct bmp_header* header)
@@ -119,22 +122,16 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     {
         return NULL;
     }
-    FILE* f=fopen((char*)stream,"rb");
+    /*FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
     {
         return NULL;
-    }
-    unsigned char *pixel=(unsigned char*)malloc(header->image_size);
-    if (!pixel)
-    {
-        free(pixel);
-        fclose(f);
-        return NULL;
-    }
-    fseek(f,54,SEEK_SET);
-    fread(pixel,header->image_size,1,f);
-    fclose(f);
-    return (struct pixel *) pixel;
+    }*/
+    struct pixel *pixel=malloc(header->image_size);
+    fseek(stream,54,SEEK_SET);
+    fread(pixel,header->image_size,1,stream);
+    //fclose(f);
+    return pixel;
 }
 
 void free_bmp_image(struct bmp_image* image)
