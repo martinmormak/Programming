@@ -124,7 +124,6 @@ struct bmp_header* read_bmp_header(FILE* stream)
     {
         return NULL;
     }
-    //struct bmp_header *header=malloc(sizeof(struct bmp_header));
     unsigned char *header=(unsigned char*)malloc(55);
     FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
@@ -134,22 +133,6 @@ struct bmp_header* read_bmp_header(FILE* stream)
     }
     fseek(f,0,SEEK_SET);
     fread(header,54,1,f);
-    /*fread(&header->type,sizeof(uint16_t),1,f);
-    fread(&header->size,sizeof(uint32_t),1,f);
-    fread(&header->reserved1,sizeof(uint16_t),1,f);
-    fread(&header->reserved2,sizeof(uint16_t),1,f);
-    fread(&header->offset,sizeof(uint32_t),1,f);
-    fread(&header->dib_size,sizeof(uint32_t),1,f);
-    fread(&header->width,sizeof(uint32_t),1,f);
-    fread(&header->height,sizeof(uint32_t),1,f);
-    fread(&header->planes,sizeof(uint16_t),1,f);
-    fread(&header->bpp,sizeof(uint16_t),1,f);
-    fread(&header->compression,sizeof(uint32_t),1,f);
-    fread(&header->image_size,sizeof(uint32_t),1,f);
-    fread(&header->x_ppm,sizeof(uint32_t),1,f);
-    fread(&header->y_ppm,sizeof(uint32_t),1,f);
-    fread(&header->num_colors,sizeof(uint32_t),1,f);
-    fread(&header->important_colors,sizeof(uint32_t),1,f);*/
     fclose(f);
     return (struct bmp_header*) header;
 }

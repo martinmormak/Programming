@@ -9,10 +9,14 @@
 
 struct bmp_image* flip_horizontally(const struct bmp_image* image)
 {
-    /*struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=image->header;
     img->data=image->data;
-    uint32_t i=0;
+    /*uint32_t i=0;
     unsigned char *bgr=(unsigned char*)image->data;
     uint32_t size=image->header->image_size/image->header->height;
     printf("%d\t%d\n",image->header->height,image->header->width);
@@ -39,38 +43,89 @@ struct bmp_image* flip_horizontally(const struct bmp_image* image)
     }
     printf("%d\t%d\n",image->header->height,image->header->width);
     img->data=(struct pixel*)bgr;
-    free(bgr);
-    return img;*/
-    return NULL;
+    free(bgr);*/
+    return img;
 }
 
 struct bmp_image* flip_vertically(const struct bmp_image* image)
 {
-    return NULL;
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=image->header;
+    img->data=image->data;
+    return img;
 }
 
 struct bmp_image* rotate_right(const struct bmp_image* image)
 {
-    return NULL;
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=image->header;
+    img->data=image->data;
+    return img;
 }
 
 struct bmp_image* rotate_left(const struct bmp_image* image)
 {
-    return NULL;
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=image->header;
+    img->data=image->data;
+    return img;
 }
 
 struct bmp_image* scale(const struct bmp_image* image, float factor)
 {
-    return NULL;
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=image->header;
+    img->data=image->data;
+    if(factor==1)
+    {
+    }
+    else if(factor<1)
+    {
+    }
+    else if(factor>1)
+    {
+    }
+    return img;
 }
 
 struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, const uint32_t start_x, const uint32_t height, const uint32_t width)
 {
-    return NULL;
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=image->header;
+    img->data=image->data;
+    return img;
 }
 
 struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_keep)
 {
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    if(colors_to_keep==NULL)
+    {
+        return NULL;
+    }
     int keep[3]={0,0,0};
     for(int i=0;i<strlen(colors_to_keep);i++)
     {
@@ -111,7 +166,6 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
                 bgr[position]=0;
             }
             position++;
-            //printf("%d\t%d\t%d\n",bgr[i],bgr[i+1],bgr[i+2]);
         }
         if((int)position%2!=0)
         {
