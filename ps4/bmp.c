@@ -142,7 +142,10 @@ void free_bmp_image(struct bmp_image* image)
         {
             free(image->data);
         }
+        if (image->header != NULL)
+        {
+            free(image->header);
+        }
         free(image);
     }
-    return;
 }
