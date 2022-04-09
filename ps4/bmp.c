@@ -31,7 +31,7 @@ struct bmp_image* read_bmp(FILE* stream)
         free(image);
         return NULL;
     }
-    printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
+    //printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
     image->data=malloc(sizeof(unsigned char) * (image->header->image_size));
     image->data=read_data(stream,head);
     if(image->data==NULL)
@@ -91,11 +91,16 @@ struct bmp_header* read_bmp_header(FILE* stream)
     {
         return NULL;
     }
-    unsigned char *header=(unsigned char*)malloc(55);
     FILE* f=fopen((char*)stream,"rb");
     if(f==NULL)
     {
+        return NULL;
+    }
+    unsigned char *header=(unsigned char*)malloc(55);
+    if (!header)
+    {
         free(header);
+        fclose(f);
         return NULL;
     }
     fseek(f,0,SEEK_SET);
@@ -119,7 +124,6 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     {
         return NULL;
     }
-    fseek(f,54,SEEK_SET);
     unsigned char *pixel=(unsigned char*)malloc(header->image_size);
     if (!pixel)
     {
@@ -127,6 +131,7 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
         fclose(f);
         return NULL;
     }
+    fseek(f,54,SEEK_SET);
     fread(pixel,header->image_size,1,f);
     fclose(f);
     return (struct pixel *) pixel;

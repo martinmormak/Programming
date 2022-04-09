@@ -15,35 +15,30 @@ struct bmp_image* flip_horizontally(const struct bmp_image* image)
     }
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=image->header;
-    img->data=image->data;
-    /*uint32_t i=0;
     unsigned char *bgr=(unsigned char*)image->data;
     uint32_t size=image->header->image_size/image->header->height;
-    printf("%d\t%d\n",image->header->height,image->header->width);
     for(uint32_t x=0;x<image->header->height;x++)
     {
-        i=0;
-        while(i<image->header->width-i-3)
+        uint32_t a=0;
+        for(uint32_t i=0;i<image->header->width/2;i++)
         {
+            //printf("%d\t%d\t%d\t%d\t%d\n",x,i,a,size*x+a,size*x+image->header->width*3-a-3);
             unsigned char b;
             unsigned char g;
             unsigned char r;
-            b=bgr[size*x+i];
-            g=bgr[size*x+i+1];
-            r=bgr[size*x+i+2];
-            bgr[size*x+i]=bgr[size*x+image->header->width-i-3];
-            bgr[size*x+i+1]=bgr[size*x+image->header->width-i-2];
-            bgr[size*x+i+2]=bgr[size*x+image->header->width-i-1];
-            bgr[size*x+image->header->width-i-3]=b;
-            bgr[size*x+image->header->width-i-2]=g;
-            bgr[size*x+image->header->width-i-1]=r;
-            i=i+3;
-            //printf("%d\t%d\t%d\n",bgr[i],bgr[i+1],bgr[i+2]);
+            b=bgr[size*x+a];
+            g=bgr[size*x+a+1];
+            r=bgr[size*x+a+2];
+            bgr[size*x+a]=bgr[size*x+image->header->width*3-a-3];
+            bgr[size*x+a+1]=bgr[size*x+image->header->width*3-a-2];
+            bgr[size*x+a+2]=bgr[size*x+image->header->width*3-a-1];
+            bgr[size*x+image->header->width*3-a-3]=b;
+            bgr[size*x+image->header->width*3-a-2]=g;
+            bgr[size*x+image->header->width*3-a-1]=r;
+            a=a+3;
         }
     }
-    printf("%d\t%d\n",image->header->height,image->header->width);
     img->data=(struct pixel*)bgr;
-    free(bgr);*/
     return img;
 }
 
@@ -55,7 +50,30 @@ struct bmp_image* flip_vertically(const struct bmp_image* image)
     }
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=image->header;
-    img->data=image->data;
+    unsigned char *bgr=(unsigned char*)image->data;
+    uint32_t size=image->header->image_size/image->header->width;
+    for(uint32_t x=0;x<image->header->height/2;x++)
+    {
+        uint32_t a=0;
+        for(uint32_t i=0;i<image->header->width;i++)
+        {
+            //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
+            unsigned char b;
+            unsigned char g;
+            unsigned char r;
+            b=bgr[size*x+a];
+            g=bgr[size*x+a+1];
+            r=bgr[size*x+a+2];
+            bgr[size*x+a]=bgr[image->header->image_size-size*x-size+a];
+            bgr[size*x+a+1]=bgr[image->header->image_size-size*x-size+a+1];
+            bgr[size*x+a+2]=bgr[image->header->image_size-size*x-size+a+2];
+            bgr[image->header->image_size-size*x-size+a]=b;
+            bgr[image->header->image_size-size*x-size+a+1]=g;
+            bgr[image->header->image_size-size*x-size+a+2]=r;
+            a=a+3;
+        }
+    }
+    img->data=(struct pixel*)bgr;
     return img;
 }
 
@@ -67,7 +85,28 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
     }
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=image->header;
-    img->data=image->data;
+    unsigned char *bgr=(unsigned char*)image->data;
+    unsigned char *nbgr=(unsigned char*)image->data;
+    /*for(int i=0;i<image->header->image_size;i++)
+    {
+        nbgr[i]=0;
+    }*/
+    uint32_t size=image->header->image_size/image->header->width;
+    for(uint32_t x=0;x<image->header->width;x++)
+    {
+        uint32_t a=0;
+        for(uint32_t i=0;i<image->header->height;i++)
+        {
+            printf("%d\t%d\n",size*x+a,size*i+image->header->width*3-x*3-3);
+            printf("%d\t%d\t%d\n",bgr[size*i+image->header->width*3-x*3-3],bgr[size*i+image->header->width*3-x*3-2],bgr[size*i+image->header->width*3-x*3-1]);
+            nbgr[size*x+a]=bgr[size*i+image->header->width*3-x*3-3];
+            nbgr[size*x+a+1]=bgr[size*i+image->header->width*3-x*3-2];
+            nbgr[size*x+a+2]=bgr[size*i+image->header->width*3-x*3-1];
+            a=a+3;
+            //printf("%d\t%d\t%d\n",nbgr[size*x+a],nbgr[size*x+a+1],nbgr[size*x+a+2]);
+        }
+    }
+    img->data=(struct pixel*)nbgr;
     return img;
 }
 
@@ -92,7 +131,7 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=image->header;
     img->data=image->data;
-    if(factor==1)
+    /*if(factor==1)
     {
     }
     else if(factor<1)
@@ -100,7 +139,7 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     }
     else if(factor>1)
     {
-    }
+    }*/
     return img;
 }
 
@@ -146,30 +185,29 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
     img->header=image->header;
     img->data=image->data;
     unsigned char *bgr=(unsigned char*)image->data;
-    uint32_t position=0;
-    for(uint32_t x=0;x<image->header->image_size;x=position)
+    uint32_t size=image->header->image_size/image->header->height;
+    for(uint32_t x=0;x<image->header->height;x++)
     {
-        for(uint32_t i=0;i<image->header->width;i=i+3)
+        uint32_t a=0;
+        for(uint32_t i=0;i<image->header->width/2+1;i++)
         {
+            //printf("%d\t%d\t%d\t%d\t%d\n",x,i,a,size*x+a,size*x+image->header->width*3-a-3);
             if(keep[0]!=1)
             {
-                bgr[position]=0;
+                bgr[size*x+a]=0;
+                bgr[size*x+image->header->width*3-a-3]=0;
             }
-            position++;
             if(keep[1]!=1)
             {
-                bgr[position]=0;
+                bgr[size*x+a+1]=0;
+                bgr[size*x+image->header->width*3-a-2]=0;
             }
-            position++;
             if(keep[2]!=1)
             {
-                bgr[position]=0;
+                bgr[size*x+a+2]=0;
+                bgr[size*x+image->header->width*3-a-1]=0;
             }
-            position++;
-        }
-        if((int)position%2!=0)
-        {
-            position++;
+            a=a+3;
         }
     }
     img->data=(struct pixel*)bgr;
