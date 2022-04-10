@@ -24,19 +24,19 @@ int main()
         ++image->data;
     }*/
     // //printf("%d\t%d\t%d\n",image->header->size,image->header->width,image->header->height);
-    struct bmp_image* img;
-    img=rotate_right(image);
-    stream=fopen("save3.bmp","w");
+    struct bmp_image* img1;
+    img1=flip_horizontally(image);
+    stream=fopen("save1.bmp","w");
     if(stream==NULL)
     {
         return false;
     }
-    printf("%d\n",write_bmp(stream,img));
-    free(img);
+    printf("%d\n",write_bmp(stream,img1));
+    free(img1);
     fclose(stream);
     struct bmp_image* img2;
-    img2=rotate_left(image);
-    stream=fopen("save4.bmp","w");
+    img2=flip_vertically(image);
+    stream=fopen("save2.bmp","w");
     if(stream==NULL)
     {
         return false;
@@ -45,8 +45,8 @@ int main()
     free(img2);
     fclose(stream);
     struct bmp_image* img3;
-    img3=flip_horizontally(image);
-    stream=fopen("save1.bmp","w");
+    img3=rotate_right(image);
+    stream=fopen("save3.bmp","w");
     if(stream==NULL)
     {
         return false;
@@ -55,8 +55,8 @@ int main()
     free(img3);
     fclose(stream);
     struct bmp_image* img4;
-    img4=flip_vertically(image);
-    stream=fopen("save2.bmp","w");
+    img4=rotate_left(image);
+    stream=fopen("save4.bmp","w");
     if(stream==NULL)
     {
         return false;

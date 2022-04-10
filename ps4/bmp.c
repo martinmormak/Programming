@@ -9,10 +9,12 @@ struct bmp_image* read_bmp(FILE* stream)
 {
     if(stream==NULL)
     {
+        fprintf(stderr,"Error: This is not a BMP file.\n");
         return NULL;
     }
     if(stream==stdin)
     {
+        fprintf(stderr,"Error: This is not a BMP file.\n");
         return NULL;
     }
     struct bmp_image *image=malloc(sizeof(struct bmp_image));
@@ -22,10 +24,6 @@ struct bmp_image* read_bmp(FILE* stream)
         return NULL;
     }
     image->header=read_bmp_header(stream);
-    /*if(image->header==NULL)
-    {
-        printf("HEADER\n");
-    }*/
     struct bmp_header *head=image->header;
     if(image->header==NULL)
     {
@@ -39,7 +37,6 @@ struct bmp_image* read_bmp(FILE* stream)
         free(image);
         return NULL;
     }
-    //printf("%d\t%d\t%d\n",image->header->height,image->header->width,image->header->image_size);
     image->data=malloc(sizeof(unsigned char) * (image->header->image_size));
     image->data=read_data(stream,head);
     if(image->data==NULL)
@@ -101,11 +98,6 @@ struct bmp_header* read_bmp_header(FILE* stream)
     {
         return NULL;
     }
-    /*FILE* f=fopen((char*)stream,"rb");
-    if(f==NULL)
-    {
-        return NULL;
-    }*/
     struct bmp_header *header=malloc(sizeof(struct bmp_header));
     fseek(stream,0,SEEK_SET);
     fread(header,sizeof(struct bmp_header),1,stream);
@@ -114,7 +106,6 @@ struct bmp_header* read_bmp_header(FILE* stream)
         free(header);
         return NULL;
     }
-    /*fclose(f);*/
     return header;
 }
 
@@ -132,15 +123,9 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     {
         return NULL;
     }
-    /*FILE* f=fopen((char*)stream,"rb");
-    if(f==NULL)
-    {
-        return NULL;
-    }*/
     struct pixel *pixel=malloc(header->image_size);
-    fseek(stream,54,SEEK_SET);
+    fseek(stream,sizeof(struct bmp_header),SEEK_SET);
     fread(pixel,header->image_size,1,stream);
-    //fclose(f);
     return pixel;
 }
 
