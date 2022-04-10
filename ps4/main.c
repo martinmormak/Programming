@@ -8,8 +8,8 @@
 
 int main()
 {
-    //FILE* stream=(FILE*)"assets/adventurer.bmp";
-    //FILE* stream=(FILE*)"file.bmp";
+    //FILE* stream=fopen("assets/adventurer.bmp","rb");
+    //FILE* stream=fopen("file.bmp","rb");
     FILE* stream=fopen("skuska.bmp","rb");
     if(stream==NULL)
     {
