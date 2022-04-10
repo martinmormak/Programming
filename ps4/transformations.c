@@ -316,6 +316,15 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
     {
         return NULL;
     }
+    for (int i = 0; i < strlen(colors_to_keep); i++)
+    {
+        if(colors_to_keep[i]!='b'&&colors_to_keep[i]!='g'&&colors_to_keep[i]!='r')
+        {
+            printf("skuska\n");
+            return NULL;
+        }
+    }
+    
     int keep[3]={0,0,0};
     for(int i=0;i<strlen(colors_to_keep);i++)
     {
