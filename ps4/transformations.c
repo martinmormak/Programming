@@ -56,10 +56,10 @@ struct bmp_image* flip_vertically(const struct bmp_image* image)
     unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->height/2;x++)
+    for(uint32_t x=0;x<image->header->height;x++)
     {
         uint32_t a=0;
-        for(uint32_t i=0;i<image->header->width;i++)
+        for(uint32_t i=0;i<image->header->width/2;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
             unsigned char b;
@@ -269,6 +269,10 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     memcpy(header,image->header,sizeof(struct bmp_header));
     struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
     memcpy(data,image->data,image->header->image_size);
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=header;
+    img->data=data;
+    return img;
     /*unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     header->width=width;
@@ -303,11 +307,11 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
             nbgr[nsize*(width-x-1)+a+2]=bgr[(image->header->height-start_y-1)*size+start_x*3+a-x*size+2];
             a=a+3;
         }
-    }*/
+    }
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=header;
     img->data=data;
-    return img;
+    return img;*/
 }
 
 struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_keep)
