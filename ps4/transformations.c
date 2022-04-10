@@ -212,6 +212,10 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     {
         return NULL;
     }
+    if(factor<=0)
+    {
+        return NULL;
+    }
     /*if(factor==1)
     {
     }
