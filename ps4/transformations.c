@@ -18,12 +18,12 @@ struct bmp_image* flip_horizontally(const struct bmp_image* image)
     unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->height;x++)
+    for(uint32_t x=0;x<image->header->height/2;x++)
     {
         uint32_t a=0;
-        for(uint32_t i=0;i<image->header->width/2;i++)
+        for(uint32_t i=0;i<image->header->width;i++)
         {
-            //printf("%d\t%d\t%d\t%d\t%d\n",x,i,a,size*x+a,size*x+image->header->width*3-a-3);
+            //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
             unsigned char b;
             unsigned char g;
             unsigned char r;
@@ -117,12 +117,12 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
     uint32_t nsize=header->image_size/header->width;
     uint32_t q=0;
     uint32_t w=0;
-    for(uint32_t x=0;x<header->width;x++)
+    for(uint32_t x=0;x<header->height;x++)
     {
         uint32_t a=0;
-        for(uint32_t i=0;i<header->height;i++)
+        for(uint32_t i=0;i<header->width;i++)
         {
-            //printf("%d\t%d\n",size*x+a,size*w+image->header->width*3-q*3-3);
+            printf("%d\t%d\n",size*x+a,size*w+image->header->width*3-q*3-3);
             //printf("%d\t%d\t%d\n",bgr[size*i+image->header->width*3-x*3-3],bgr[size*i+image->header->width*3-x*3-2],bgr[size*i+image->header->width*3-x*3-1]);
             nbgr[nsize*x+a]=bgr[size*w+image->header->width*3-q*3-3];
             nbgr[nsize*x+a+1]=bgr[size*w+image->header->width*3-q*3-2];
