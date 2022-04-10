@@ -65,20 +65,27 @@ int main()
     free(img4);
     fclose(stream);
     float factor=1;
-    const uint32_t start_y=0;
-    const uint32_t start_x=0;
-    const uint32_t height=0;
-    const uint32_t width=0;
+    const uint32_t start_y=1;
+    const uint32_t start_x=1;
+    const uint32_t height=4;
+    const uint32_t width=4;
     const char* colors_to_keep="rgb";
     struct bmp_image* img5;
     img5=scale(image, factor);
     free(img5);
     struct bmp_image* img6;
     img6=crop(image, start_y, start_x, height, width);
+    stream=fopen("save6.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
+    printf("%d\n",write_bmp(stream,img6));
     free(img6);
+    fclose(stream);
     struct bmp_image* img7;
     img7=extract(image, colors_to_keep);
-    stream=fopen("save5.bmp","w");
+    stream=fopen("save7.bmp","w");
     if(stream==NULL)
     {
         return false;
