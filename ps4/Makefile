@@ -5,7 +5,7 @@ LDLIBS=-lm
 SOURCES=main.c bmp.c transformations.c
 
 
-all: ps4 
+all: ps4 codeanalysis
 
 codeanalysis: $(SOURCES)
 	cppcheck --enable=performance,unusedFunction --error-exitcode=1 $^

@@ -29,13 +29,13 @@ struct bmp_image* read_bmp(FILE* stream)
     struct bmp_header *head=image->header;
     if(image->header==NULL)
     {
-        printf("Error: This is not a BMP file.\n");
+        fprintf(stderr,"Error: This is not a BMP file.\n");
         free(image);
         return NULL;
     }
     else if(&head->size==NULL||&head->height==NULL||&head->width==NULL)
     {
-        printf("Error: Corrupted BMP file.\n");
+        fprintf(stderr,"Error: Corrupted BMP file.\n");
         free(image);
         return NULL;
     }
