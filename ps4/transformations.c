@@ -122,7 +122,7 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
         uint32_t a=0;
         for(uint32_t i=0;i<header->width;i++)
         {
-            printf("%d\t%d\n",size*x+a,size*w+image->header->width*3-q*3-3);
+            //printf("%d\t%d\n",size*x+a,size*w+image->header->width*3-q*3-3);
             //printf("%d\t%d\t%d\n",bgr[size*i+image->header->width*3-x*3-3],bgr[size*i+image->header->width*3-x*3-2],bgr[size*i+image->header->width*3-x*3-1]);
             nbgr[nsize*x+a]=bgr[size*w+image->header->width*3-q*3-3];
             nbgr[nsize*x+a+1]=bgr[size*w+image->header->width*3-q*3-2];
@@ -184,6 +184,9 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
         {
             //printf("%d\t%d\n",size*x+a,size*i+image->header->width*3-x*3-3);
             //printf("%d\t%d\t%d\n",bgr[size*i+image->header->width*3-x*3-3],bgr[size*i+image->header->width*3-x*3-2],bgr[size*i+image->header->width*3-x*3-1]);
+            /*nbgr[nsize*i+image->header->width*3-x*3-3]=bgr[size*x+a];
+            nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
+            nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];*/
             nbgr[nsize*i+image->header->width*3-x*3-3]=bgr[size*x+a];
             nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
             nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];
@@ -260,7 +263,9 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     }
     struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
     memcpy(header,image->header,sizeof(struct bmp_header));
-    unsigned char *bgr=malloc(image->header->image_size);
+    struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
+    memcpy(data,image->data,image->header->image_size);
+    /*unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     header->width=width;
     header->height=height;
@@ -294,10 +299,10 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
             nbgr[nsize*(width-x-1)+a+2]=bgr[(image->header->height-start_y-1)*size+start_x*3+a-x*size+2];
             a=a+3;
         }
-    }
+    }*/
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=header;
-    img->data=(struct pixel*)nbgr;
+    img->data=data;
     return img;
 }
 
