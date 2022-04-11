@@ -91,6 +91,18 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
     }
     struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
     memcpy(header,image->header,sizeof(struct bmp_header));
+    struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
+    memcpy(data,image->data,image->header->image_size);
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=header;
+    img->data=data;
+    return img;
+    /*if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
+    memcpy(header,image->header,sizeof(struct bmp_header));
     unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     uint32_t save=header->width;
@@ -140,12 +152,24 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=header;
     img->data=(struct pixel*)nbgr;
-    return img;
+    return img;*/
 }
 
 struct bmp_image* rotate_left(const struct bmp_image* image)
 {
     if(image==NULL)
+    {
+        return NULL;
+    }
+    struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
+    memcpy(header,image->header,sizeof(struct bmp_header));
+    struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
+    memcpy(data,image->data,image->header->image_size);
+    struct bmp_image *img=malloc(sizeof(struct bmp_image));
+    img->header=header;
+    img->data=data;
+    return img;
+    /*if(image==NULL)
     {
         return NULL;
     }
@@ -184,9 +208,6 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
         {
             //printf("%d\t%d\n",size*x+a,size*i+image->header->width*3-x*3-3);
             //printf("%d\t%d\t%d\n",bgr[size*i+image->header->width*3-x*3-3],bgr[size*i+image->header->width*3-x*3-2],bgr[size*i+image->header->width*3-x*3-1]);
-            /*nbgr[nsize*i+image->header->width*3-x*3-3]=bgr[size*x+a];
-            nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
-            nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];*/
             nbgr[nsize*i+image->header->width*3-x*3-3]=bgr[size*x+a];
             nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
             nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];
@@ -203,7 +224,7 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
     struct bmp_image *img=malloc(sizeof(struct bmp_image));
     img->header=header;
     img->data=(struct pixel*)nbgr;
-    return img;
+    return img;*/
 }
 
 struct bmp_image* scale(const struct bmp_image* image, float factor)
