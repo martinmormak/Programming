@@ -189,7 +189,6 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
             nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
             nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];
             a=a+3;
-            //printf("%d\t%d\t%d\n",nbgr[size*x+a],nbgr[size*x+a+1],nbgr[size*x+a+2]);
             w++;
             if(w>=image->header->height)
             {
