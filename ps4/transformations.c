@@ -18,10 +18,10 @@ struct bmp_image* flip_horizontally(const struct bmp_image* image)
     unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->height/2;x++)
+    for(uint32_t x=0;x<image->header->height;x++)
     {
         uint32_t a=0;
-        for(uint32_t i=0;i<image->header->width;i++)
+        for(uint32_t i=0;i<image->header->width/2;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
             unsigned char b;
@@ -56,10 +56,10 @@ struct bmp_image* flip_vertically(const struct bmp_image* image)
     unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->height;x++)
+    for(uint32_t x=0;x<image->header->height/2;x++)
     {
         uint32_t a=0;
-        for(uint32_t i=0;i<image->header->width/2;i++)
+        for(uint32_t i=0;i<image->header->width;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
             unsigned char b;
@@ -237,31 +237,31 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
 
 struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, const uint32_t start_x, const uint32_t height, const uint32_t width)
 {
+    if(image==NULL)
+    {
+        return NULL;
+    }
+    if(height<=0||height>=image->header->height)
+    {
+        return NULL;
+    }
+    if(width<=0||width>=image->header->width)
+    {
+        return NULL;
+    }
+    if(start_y<0||start_y>=image->header->height)
+    {
+        return NULL;
+    }
+    if(start_x<0||start_x>=image->header->width)
+    {
+        return NULL;
+    }
     if(start_y+height>image->header->height)
     {
         return NULL;
     }
     if(start_x+width>image->header->width)
-    {
-        return NULL;
-    }
-    if(start_y>image->header->height)
-    {
-        return NULL;
-    }
-    if(start_x>image->header->width)
-    {
-        return NULL;
-    }
-    if(height<0)
-    {
-        return NULL;
-    }
-    if(width<0)
-    {
-        return NULL;
-    }
-    if(image==NULL)
     {
         return NULL;
     }
@@ -273,6 +273,10 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     img->header=header;
     img->data=data;
     return img;
+
+
+
+
     /*unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     header->width=width;
