@@ -145,6 +145,7 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
 
 struct bmp_image* rotate_left(const struct bmp_image* image)
 {
+    
     if(image==NULL)
     {
         return NULL;
@@ -167,7 +168,7 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
     }
     header->image_size=header->height*new_size;
     header->size=header->image_size+(uint32_t)sizeof(struct bmp_header);
-    unsigned char *nbgr=malloc(image->header->image_size);
+    unsigned char *nbgr=malloc(header->image_size);
     memcpy(nbgr,image->data,image->header->image_size);
     for(int i=0;i<header->image_size;i++)
     {
@@ -177,16 +178,13 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
     uint32_t nsize=header->image_size/header->width;
     uint32_t q=0;
     uint32_t w=0;
-    for(uint32_t x=0;x<header->width;x++)
+    for(uint32_t x=0;x<header->height;x++)
     {
         uint32_t a=0;
-        for(uint32_t i=0;i<header->height;i++)
+        for(uint32_t i=0;i<header->width;i++)
         {
-            //printf("%d\t%d\n",size*x+a,size*i+image->header->width*3-x*3-3);
+            //printf("%d\t%d\n",size*x+a,size*w+image->header->width*3-q*3-3);
             //printf("%d\t%d\t%d\n",bgr[size*i+image->header->width*3-x*3-3],bgr[size*i+image->header->width*3-x*3-2],bgr[size*i+image->header->width*3-x*3-1]);
-            /*nbgr[nsize*i+image->header->width*3-x*3-3]=bgr[size*x+a];
-            nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
-            nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];*/
             nbgr[nsize*i+image->header->width*3-x*3-3]=bgr[size*x+a];
             nbgr[nsize*i+image->header->width*3-x*3-2]=bgr[size*x+a+1];
             nbgr[nsize*i+image->header->width*3-x*3-1]=bgr[size*x+a+2];
@@ -360,15 +358,6 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     {
         return NULL;
     }
-    /*if(factor==1)
-    {
-    }
-    else if(factor<1)
-    {
-    }
-    else if(factor>1)
-    {
-    }*/
     struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
     memcpy(header,image->header,sizeof(struct bmp_header));
     struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
