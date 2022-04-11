@@ -317,13 +317,6 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
     {
         return NULL;
     }
-    /*for (int i = 0; i < strlen(colors_to_keep); i++)
-    {
-        if(colors_to_keep[i]!='b'&&colors_to_keep[i]!='g'&&colors_to_keep[i]!='r')
-        {
-            return NULL;
-        }
-    }*/
     int keep[3]={0,0,0};
     for(int i=0;i<strlen(colors_to_keep);i++)
     {
@@ -354,21 +347,17 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
         uint32_t a=0;
         for(uint32_t i=0;i<image->header->width;i++)
         {
-            //printf("%d\t%d\t%d\t%d\t%d\n",x,i,a,size*x+a,size*x+image->header->width*3-a-3);
             if(keep[0]!=1)
             {
                 bgr[size*x+a]=0;
-                //bgr[size*x+image->header->width*3-a-3]=0;
             }
             if(keep[1]!=1)
             {
                 bgr[size*x+a+1]=0;
-                //bgr[size*x+image->header->width*3-a-2]=0;
             }
             if(keep[2]!=1)
             {
                 bgr[size*x+a+2]=0;
-                //bgr[size*x+image->header->width*3-a-1]=0;
             }
             a=a+3;
         }
