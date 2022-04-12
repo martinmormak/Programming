@@ -17,13 +17,6 @@ int main()
     }
     struct bmp_image* image=read_bmp(stream);
     fclose(stream);
-    /*uint32_t size=image->header->height*image->header->width;
-    for(int i=(int)(size);i>0;i--)
-    {
-        printf("%d\t%d\t%d\t%d\n",i,image->data->blue,image->data->green,image->data->red);
-        ++image->data;
-    }*/
-    // //printf("%d\t%d\t%d\n",image->header->size,image->header->width,image->header->height);
     struct bmp_image* img1;
     img1=flip_horizontally(image);
     stream=fopen("save1.bmp","w");
@@ -64,13 +57,13 @@ int main()
     printf("%d\n",write_bmp(stream,img4));
     free(img4);
     fclose(stream);
-    float factor=1;
+    /*float factor=1;
     const uint32_t start_y=1;
     const uint32_t start_x=1;
     const uint32_t height=4;
-    const uint32_t width=4;
+    const uint32_t width=4;*/
     const char* colors_to_keep="rgb";
-    struct bmp_image* img5;
+    /*struct bmp_image* img5;
     img5=scale(image, factor);
     free(img5);
     struct bmp_image* img6;
@@ -82,7 +75,7 @@ int main()
     }
     printf("%d\n",write_bmp(stream,img6));
     free(img6);
-    fclose(stream);
+    fclose(stream);*/
     struct bmp_image* img7;
     img7=extract(image, colors_to_keep);
     stream=fopen("save7.bmp","w");
@@ -90,7 +83,7 @@ int main()
     {
         return false;
     }
-    //printf("%d\n",write_bmp(stream,img7));
+    printf("%d\n",write_bmp(stream,img7));
     free(img7);
     fclose(stream);
     free_bmp_image(image);
