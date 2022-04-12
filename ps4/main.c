@@ -8,9 +8,9 @@
 
 int main()
 {
-    //FILE* stream=fopen("assets/square.2x1.bmp","rb");
+    FILE* stream=fopen("assets/cherry.bmp","rb");
     //FILE* stream=fopen("file.bmp","rb");
-    FILE* stream=fopen("skuska.bmp","rb");
+    //FILE* stream=fopen("skuska.bmp","rb");
     if(stream==NULL)
     {
         return false;
