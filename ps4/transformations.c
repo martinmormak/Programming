@@ -128,6 +128,9 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     new_image->header=header;
     new_image->header->width=image->header->width*(uint32_t)factor;
     new_image->header->height=image->header->width*(uint32_t)factor;
+    new_image->header->image_size=new_image->header->height*new_image->header->width*3+((new_image->header->width%4)*new_image->header->height);
+    new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;
+    new_image->data=malloc(new_image->header->image_size*3);
     uint32_t new_size=header->width*3;
     if(new_size%2==0)
     {
@@ -146,7 +149,7 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
         for(uint32_t i=0;i<image->header->height;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
-            new_image->data[new_image->header->height*x+i]=image->data[(image->header->height-i-1)*image->header->width+x];
+            new_image->data[new_image->header->height*x+i]=image->data[image->header->width*(image->header->height-i-1)+x];
             //new_image->data[image->header->width*x+i]=image->data[image->header->width*x+(image->header->width-i-1)];
         }
     }
@@ -160,11 +163,11 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     {
         return NULL;
     }
-    if(height<=0||height>=image->header->height)
+    if(height<0||height>=image->header->height)
     {
         return NULL;
     }
-    if(width<=0||width>=image->header->width)
+    if(width<0||width>=image->header->width)
     {
         return NULL;
     }
@@ -188,10 +191,10 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     memcpy(header,image->header,sizeof(struct bmp_header));
     struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
     memcpy(data,image->data,image->header->image_size);
-    struct bmp_image *img=malloc(sizeof(struct bmp_image));
-    img->header=header;
-    img->data=data;
-    return img;
+    struct bmp_image *new_image=malloc(sizeof(struct bmp_image));
+    new_image->header=header;
+    new_image->data=data;
+    return new_image;
 
 
 
@@ -267,6 +270,61 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
             return NULL;
         }
     }
+    struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
+    memcpy(header,image->header,sizeof(struct bmp_header));
+    struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
+    memcpy(data,image->data,image->header->image_size);
+    struct bmp_image *new_image=malloc(sizeof(struct bmp_image));for(uint32_t x=0;x<image->header->height;x++)
+    for(uint32_t x=0;x<image->header->height;x++)
+    {
+        for(uint32_t i=0;i<image->header->width;i++)
+        {
+            new_image->data[image->header->width*x+i]=image->data[image->header->width*x+i];
+            if(keep[0]!=1)
+            {
+                new_image->data[image->header->width*x+i].blue=0;
+            }
+            if(keep[1]!=1)
+            {
+                new_image->data[image->header->width*x+i].green=0;
+            }
+            if(keep[2]!=1)
+            {
+                new_image->data[image->header->width*x+i].red=0;
+            }
+        }
+    }
+    new_image->header=header;
+    new_image->data=data;
+    return new_image;
+    /*if(image==NULL)
+    {
+        return NULL;
+    }
+    if(colors_to_keep==NULL)
+    {
+        return NULL;
+    }
+    int keep[3]={0,0,0};
+    for(int i=0;i<strlen(colors_to_keep);i++)
+    {
+        if(colors_to_keep[i]=='b')
+        {
+            keep[0]=1;
+        }
+        else if(colors_to_keep[i]=='g')
+        {
+            keep[1]=1;
+        }
+        else if(colors_to_keep[i]=='r')
+        {
+            keep[2]=1;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
     struct bmp_image *new_image=malloc(sizeof(struct bmp_image));
     struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
     memcpy(header,image->header,sizeof(struct bmp_header));
@@ -292,5 +350,5 @@ struct bmp_image* extract(const struct bmp_image* image, const char* colors_to_k
         }
     }
     new_image->header=header;
-    return new_image;
+    return new_image;*/
 }
