@@ -25,6 +25,7 @@ struct bmp_image* read_bmp(FILE* stream)
     }
     image->header=read_bmp_header(stream);
     struct bmp_header *head=image->header;
+    //printf("%d\t%d\n",image->header->width,image->header->height);
     if(image->header==NULL)
     {
         fprintf(stderr,"Error: This is not a BMP file.\n");

@@ -8,8 +8,8 @@
 
 int main()
 {
-    FILE* stream=fopen("assets/umbrella.bmp","rb");
-    //FILE* stream=fopen("file.bmp","rb");
+    //FILE* stream=fopen("assets/umbrella.bmp","rb");
+    FILE* stream=fopen("file.bmp","rb");
     //FILE* stream=fopen("skuska.bmp","rb");
     if(stream==NULL)
     {
@@ -57,7 +57,7 @@ int main()
     printf("%d\n",write_bmp(stream,img4));
     free(img4);
     fclose(stream);
-    float factor=1;
+    float factor=(float)2.745238;
     const uint32_t start_y=1;
     const uint32_t start_x=1;
     const uint32_t height=4;
