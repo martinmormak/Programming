@@ -139,20 +139,8 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     memcpy(header,image->header,sizeof(struct bmp_header));
     new_image->header=header;
     new_image->header->width=image->header->width*(uint32_t)factor;
-    new_image->header->height=image->header->width*(uint32_t)factor;
+    new_image->header->height=image->header->height*(uint32_t)factor;
     new_image->header->image_size=new_image->header->height*new_image->header->width*3+((new_image->header->width%4)*new_image->header->height);
-    new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;
-    new_image->data=malloc(new_image->header->image_size*3);
-    uint32_t new_size=header->width*3;
-    if(new_size%2==0)
-    {
-        new_size=new_size+2;
-    }
-    else
-    {
-        new_size=new_size+1;
-    }
-    new_image->header->image_size=header->height*new_size;
     new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;
     new_image->data=malloc(new_image->header->image_size*3);
     //uint32_t size=image->header->image_size/image->header->height;
@@ -206,11 +194,11 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     struct bmp_image *new_image=malloc(sizeof(struct bmp_image));
     new_image->header=header;
     new_image->data=data;
+    new_image->header->width=width;
+    new_image->header->height=height;
+    new_image->header->image_size=new_image->header->height*new_image->header->width*3+((new_image->header->width%4)*new_image->header->height);
+    new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;
     return new_image;
-
-
-
-
     /*unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     header->width=width;
