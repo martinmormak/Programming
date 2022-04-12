@@ -199,6 +199,7 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     new_image->header->image_size=new_image->header->height*new_image->header->width*3+((new_image->header->width%4)*new_image->header->height);
     new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;
     return new_image;
+    
     /*unsigned char *bgr=malloc(image->header->image_size);
     memcpy(bgr,image->data,image->header->image_size);
     header->width=width;
