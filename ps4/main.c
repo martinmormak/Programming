@@ -8,8 +8,8 @@
 
 int main()
 {
-    //FILE* stream=fopen("assets/cherry.bmp","rb");
-    FILE* stream=fopen("file.bmp","rb");
+    FILE* stream=fopen("assets/cherry.bmp","rb");
+    //FILE* stream=fopen("file.bmp","rb");
     //FILE* stream=fopen("skuska.bmp","rb");
     if(stream==NULL)
     {
@@ -57,7 +57,7 @@ int main()
     printf("%d\n",write_bmp(stream,img4));
     free(img4);
     fclose(stream);
-    float factor=(float)3.783758;
+    float factor=(float)2.3;
     const uint32_t start_y=0;
     const uint32_t start_x=1;
     const uint32_t height=1;
@@ -65,7 +65,14 @@ int main()
     const char* colors_to_keep="rgb";
     struct bmp_image* img5;
     img5=scale(image, factor);
+    stream=fopen("save5.bmp","w");
+    if(stream==NULL)
+    {
+        return false;
+    }
+    printf("%d\n",write_bmp(stream,img5));
     free(img5);
+    fclose(stream);
     struct bmp_image* img6;
     img6=crop(image, start_y, start_x, height, width);
     stream=fopen("save6.bmp","w");

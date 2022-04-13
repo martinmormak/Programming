@@ -147,12 +147,15 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     new_image->data=malloc(new_image->header->image_size*3);
     //printf("%d\t%d\n",new_image->header->image_size,new_image->header->size);
     //uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->width;x++)
+    for(uint32_t x=0;x<new_image->header->height;x++)
     {
-        for(uint32_t i=0;i<image->header->height;i++)
+        uint32_t o_x=(uint32_t)((float)x/factor);
+        for(uint32_t i=0;i<new_image->header->width;i++)
         {
+            uint32_t o_i=(uint32_t)((float)i/factor);
+            //printf("%d\t%d\t%d\t%d\n",x,i,o_x,o_i);
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
-            new_image->data[new_image->header->height*x+i]=image->data[image->header->width*(image->header->height-i-1)+x];
+            new_image->data[new_image->header->width*x+i]=image->data[image->header->width*o_x+o_i];
             //new_image->data[image->header->width*x+i]=image->data[image->header->width*x+(image->header->width-i-1)];
         }
     }
