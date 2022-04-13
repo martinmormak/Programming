@@ -57,11 +57,11 @@ int main()
     printf("%d\n",write_bmp(stream,img4));
     free(img4);
     fclose(stream);
-    float factor=(float)2.745238;
-    const uint32_t start_y=1;
+    float factor=(float)0.635222;
+    const uint32_t start_y=0;
     const uint32_t start_x=1;
-    const uint32_t height=4;
-    const uint32_t width=4;
+    const uint32_t height=1;
+    const uint32_t width=1;
     const char* colors_to_keep="rgb";
     struct bmp_image* img5;
     img5=scale(image, factor);
