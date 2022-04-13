@@ -138,8 +138,8 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
     memcpy(header,image->header,sizeof(struct bmp_header));
     new_image->header=header;
-    new_image->header->width=(uint32_t)(image->header->width*(uint32_t)(factor*100+0.5)+50)/100;
-    new_image->header->height=(uint32_t)(image->header->height*(uint32_t)(factor*100+0.5)+50)/100;
+    new_image->header->width=(uint32_t)(image->header->width*(uint32_t)(factor*10000+0.5)+5000)/10000;
+    new_image->header->height=(uint32_t)(image->header->height*(uint32_t)(factor*10000+0.5)+5000)/10000;
     //printf("%d\t%d\n",image->header->height,image->header->width);
     //printf("%d\t%d\n",new_image->header->height,new_image->header->width);
     new_image->header->image_size=new_image->header->width*new_image->header->height*3+((new_image->header->width%4)*new_image->header->height);
