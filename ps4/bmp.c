@@ -136,11 +136,6 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     }
 
     pixel=(struct pixel *)data;
-
-
-
-    fseek(stream,sizeof(struct bmp_header),SEEK_SET);
-    fread(pixel,header->image_size,1,stream);
     return pixel;
 }
 
