@@ -125,6 +125,20 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
         return NULL;
     }
     struct pixel *pixel=malloc(header->image_size);
+
+    //uint32_t row_padded = (uint32_t)((header->width*3 + 3) & (uint32_t)(~3));
+    uint32_t size=header->width*header->height*3+((header->width%4)*header->height);
+    unsigned char* data = malloc(size);
+
+    for(int i = 0; i < header->height; i++)
+    {
+        fread(data, sizeof(unsigned char), size, stream);
+    }
+
+    pixel=(struct pixel *)data;
+
+
+
     fseek(stream,sizeof(struct bmp_header),SEEK_SET);
     fread(pixel,header->image_size,1,stream);
     return pixel;
