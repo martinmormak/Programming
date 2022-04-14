@@ -67,8 +67,6 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     header.height=image->header->height;
     header.width=image->header->width;
     header.image_size=image->header->image_size;
-    fseek(stream,54,SEEK_SET);
-    fwrite(image->data,sizeof(char),image->header->image_size,stream);
     fseek(stream,0,SEEK_SET);
     fwrite("BM",sizeof(uint16_t),1,stream);
     fwrite(&header.size,sizeof(uint32_t),1,stream);
@@ -86,6 +84,19 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     int32_t bpp=0x0018;
     fwrite(&bpp,sizeof(uint16_t),1,stream);
     fwrite(&reserved,sizeof(uint32_t),1,stream);
+    uint32_t size=image->header->image_size/image->header->height;
+    fseek(stream,54,SEEK_SET);
+    fwrite(image->data,sizeof(char),image->header->image_size,stream);
+    struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
+    for(uint32_t i = 0; i < image->header->height; i++)
+    {
+        fseek(stream,54+i*size,SEEK_SET);
+        for(uint32_t j = 0; j < image->header->width; j++)
+        {
+            *pPixel=image->data[image->header->width*i+j];
+            fwrite(pPixel,sizeof(uint32_t),1,stream);
+        }
+    }
     return true;
 }
 
@@ -124,18 +135,20 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     {
         return NULL;
     }
-    struct pixel *pixel=malloc(header->image_size);
+    struct pixel *pixel=malloc(header->height*header->width*3);
 
-    //uint32_t row_padded = (uint32_t)((header->width*3 + 3) & (uint32_t)(~3));
-    uint32_t size=header->width*header->height*3+((header->width%4)*header->height);
-    unsigned char* data = malloc(size);
+    struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
 
-    for(int i = 0; i < header->height; i++)
+    uint32_t size=header->image_size/header->height;
+    for(uint32_t i = 0; i < header->height; i++)
     {
-        fread(data, sizeof(unsigned char), size, stream);
+        fseek(stream,54+i*size,SEEK_SET);
+        for(uint32_t j = 0; j < header->width; j++)
+        {
+            fread(pPixel, sizeof(struct pixel), 1, stream);
+            pixel[header->width*i+j] = *pPixel;
+        }
     }
-
-    pixel=(struct pixel *)data;
     return pixel;
 }
 

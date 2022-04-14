@@ -193,17 +193,6 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     {
         return NULL;
     }
-    /*struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
-    memcpy(header,image->header,sizeof(struct bmp_header));
-    struct pixel *data = (struct pixel*) malloc(sizeof(struct pixel));
-    memcpy(data,image->data,image->header->image_size);
-    struct bmp_image *new_image=malloc(sizeof(struct bmp_image));
-    new_image->header=header;
-    new_image->data=data;
-    new_image->header->width=width;
-    new_image->header->height=height;
-    new_image->header->image_size=new_image->header->height*new_image->header->width*3+((new_image->header->width%4)*new_image->header->height);
-    new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;*/
     struct bmp_image *new_image=malloc(sizeof(struct bmp_image));
     struct bmp_header *header = (struct bmp_header*) malloc(sizeof(struct bmp_header));
     memcpy(header,image->header,sizeof(struct bmp_header));
