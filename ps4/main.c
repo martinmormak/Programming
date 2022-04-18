@@ -57,7 +57,7 @@ int main()
     printf("%d\n",write_bmp(stream,img4));
     free(img4);
     fclose(stream);
-    float factor=(float)3.495806;
+    float factor=(float)0.559676;
     const uint32_t start_y=10;
     const uint32_t start_x=10;
     const uint32_t height=20;

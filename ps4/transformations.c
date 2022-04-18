@@ -55,7 +55,7 @@ struct bmp_image* flip_vertically(const struct bmp_image* image)
 }
 
 struct bmp_image* rotate_right(const struct bmp_image* image)
-{
+{   
     if(image==NULL)
     {
         return NULL;
@@ -76,9 +76,9 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
         new_image->data[i].red=0;
     }
     //uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->height;x++)
+    for(uint32_t x=0;x<image->header->width;x++)
     {
-        for(uint32_t i=0;i<image->header->width;i++)
+        for(uint32_t i=0;i<image->header->height;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
             new_image->data[new_image->header->width*x+i]=image->data[image->header->width*i+image->header->width-1-x];
@@ -111,9 +111,9 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
         new_image->data[i].red=0;
     }
     //uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<image->header->width;x++)
+    for(uint32_t x=0;x<image->header->height;x++)
     {
-        for(uint32_t i=0;i<image->header->height;i++)
+        for(uint32_t i=0;i<image->header->width;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
             new_image->data[new_image->header->width*i+new_image->header->width-1-x]=image->data[image->header->width*x+i];
@@ -165,6 +165,7 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
 
 struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, const uint32_t start_x, const uint32_t height, const uint32_t width)
 {
+    //printf("%d\t%d\n",image->header->width,image->header->height);
     if(image==NULL)
     {
         return NULL;
@@ -201,7 +202,7 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
     new_image->header->height=height;
     new_image->header->image_size=new_image->header->height*new_image->header->width*3+((new_image->header->width%4)*new_image->header->height);
     new_image->header->size=(uint32_t)sizeof(struct bmp_header)+new_image->header->image_size;
-    new_image->data=malloc(new_image->header->width*new_image->header->height*3);
+    new_image->data=malloc(new_image->header->image_size*3);
     for(int i=0;i<new_image->header->image_size;i++)
     {
         new_image->data[i].blue=0;
@@ -209,12 +210,13 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
         new_image->data[i].red=0;
     }
     //uint32_t size=image->header->image_size/image->header->height;
-    for(uint32_t x=0;x<height;x++)
+    for(uint32_t x=0;x<image->header->width;x++)
     {
-        for(uint32_t i=0;i<width;i++)
+        for(uint32_t i=0;i<image->header->height;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
-            new_image->data[new_image->header->width*x+i]=image->data[(image->header->height-start_y-1-x)*image->header->width+i+start_x-1];
+            //printf("%d\t%d\t%d\n",i,x,(image->header->height-height-start_y+x)*image->header->width+start_x+i);
+            new_image->data[new_image->header->height*x+i]=image->data[(image->header->height-height-start_y+x)*image->header->width+start_x+i];
             //new_image->data[image->header->width*x+i]=image->data[image->header->width*x+(image->header->width-i-1)];
         }
     }
