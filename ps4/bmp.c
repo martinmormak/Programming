@@ -87,14 +87,17 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     uint32_t size=image->header->image_size/image->header->height;
     fseek(stream,54,SEEK_SET);
     fwrite(image->data,sizeof(char),image->header->image_size,stream);
-    struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
+    //struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
     for(uint32_t i = 0; i < image->header->height; i++)
     {
         fseek(stream,54+i*size,SEEK_SET);
         for(uint32_t j = 0; j < image->header->width; j++)
         {
-            *pPixel=image->data[image->header->width*i+j];
-            fwrite(pPixel,sizeof(uint32_t),1,stream);
+            unsigned char c[3];
+            c[0]=image->data[image->header->width*i+j].blue;
+            c[1]=image->data[image->header->width*i+j].green;
+            c[2]=image->data[image->header->width*i+j].red;
+            fwrite(c,3,1,stream);
         }
     }
     return true;
@@ -137,7 +140,7 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
     }
     struct pixel *pixel=malloc(header->height*header->width*3);
 
-    struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
+    //struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
 
     uint32_t size=header->image_size/header->height;
     for(uint32_t i = 0; i < header->height; i++)
@@ -145,8 +148,11 @@ struct pixel* read_data(FILE* stream, const struct bmp_header* header)
         fseek(stream,54+i*size,SEEK_SET);
         for(uint32_t j = 0; j < header->width; j++)
         {
-            fread(pPixel, sizeof(struct pixel), 1, stream);
-            pixel[header->width*i+j] = *pPixel;
+            unsigned char c[3];
+            fread(c, 3, 1, stream);
+            pixel[header->width*i+j].blue=c[0];
+            pixel[header->width*i+j].green=c[1];
+            pixel[header->width*i+j].red=c[2];
         }
     }
     return pixel;
