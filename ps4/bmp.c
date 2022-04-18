@@ -88,6 +88,7 @@ bool write_bmp(FILE* stream, const struct bmp_image* image)
     fseek(stream,54,SEEK_SET);
     fwrite(image->data,sizeof(char),image->header->image_size,stream);
     //struct pixel *pPixel = (struct pixel *)malloc(sizeof(struct pixel));
+    fwrite("0",1,image->header->image_size,stream);
     for(uint32_t i = 0; i < image->header->height; i++)
     {
         fseek(stream,54+i*size,SEEK_SET);
