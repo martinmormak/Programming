@@ -38,7 +38,7 @@ struct bmp_image* read_bmp(FILE* stream)
         free(image);
         return NULL;
     }
-    image->data=malloc(sizeof(unsigned char) * (image->header->image_size));
+    image->data=malloc(sizeof(unsigned char)*image->header->width*image->header->height*3);
     image->data=read_data(stream,head);
     if(image->data==NULL)
     {
