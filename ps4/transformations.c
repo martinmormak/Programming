@@ -81,7 +81,7 @@ struct bmp_image* rotate_right(const struct bmp_image* image)
         for(uint32_t i=0;i<image->header->width;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
-            new_image->data[new_image->header->width*i+image->header->width-1-i]=image->data[image->header->width*x+i];
+            new_image->data[new_image->header->width*i+new_image->header->width-1-x]=image->data[image->header->width*x+i];
             //new_image->data[image->header->width*x+i]=image->data[image->header->width*x+(image->header->width-i-1)];
         }
     }
@@ -116,7 +116,7 @@ struct bmp_image* rotate_left(const struct bmp_image* image)
         for(uint32_t i=0;i<image->header->height;i++)
         {
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
-            new_image->data[new_image->header->height*x+i]=image->data[(image->header->height-i-1)*image->header->width+x];
+            new_image->data[new_image->header->width*x+i]=image->data[image->header->width*i+image->header->width-1-x];
             //new_image->data[image->header->width*x+i]=image->data[image->header->width*x+(image->header->width-i-1)];
         }
     }
@@ -219,7 +219,6 @@ struct bmp_image* crop(const struct bmp_image* image, const uint32_t start_y, co
         }
     }
     new_image->header=header;
-    return new_image;
     return new_image;
     
     /*unsigned char *bgr=malloc(image->header->image_size);
