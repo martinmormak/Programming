@@ -149,9 +149,9 @@ struct bmp_image* scale(const struct bmp_image* image, float factor)
     //uint32_t size=image->header->image_size/image->header->height;
     for(uint32_t x=0;x<new_image->header->height;x++)
     {
-        uint32_t o_x=(uint32_t)((float)x/factor);
         for(uint32_t i=0;i<new_image->header->width;i++)
         {
+            uint32_t o_x=(uint32_t)((float)x/factor);
             uint32_t o_i=(uint32_t)((float)i/factor);
             //printf("%d\t%d\t%d\t%d\n",x,i,o_x,o_i);
             //printf("%d\t%d\t%d\t%d\t%d\t%d\n",x,i,a,size,size*x+a,image->header->image_size-size*x-size+a);
