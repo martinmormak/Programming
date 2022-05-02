@@ -27,13 +27,19 @@ struct backpack* destroy_backpack(struct backpack* backpack)
 
 bool add_item_to_backpack(struct backpack* backpack, struct item* item)
 {
-    create_container(backpack->items,ITEM,item);
+    if(backpack!=NULL)
+    {
+        create_container(backpack->items,ITEM,item);
+        backpack->size=backpack->size+1;
+        return true;
+    }
     return false;
 }
 
 void delete_item_from_backpack(struct backpack* backpack, struct item* item)
 {
     remove_container(backpack->items,item);
+    backpack->size=backpack->size-1;
 }
 
 struct item* get_item_from_backpack(const struct backpack* backpack, char* name)

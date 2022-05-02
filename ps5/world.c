@@ -32,8 +32,7 @@ struct container* add_room_to_world(struct container* world, struct room* room)
         }*/
         container=container->next;
     }
-    create_container(world,ROOM,room);
-    return container;
+    return create_container(world,ROOM,room);
 }
 
 struct container* destroy_world(struct container* world)

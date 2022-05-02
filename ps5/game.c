@@ -21,7 +21,7 @@ void play_game(struct game* game)
 
 struct game* create_game()
 {
-    srand((unsigned int)time(0));
+    srand((unsigned int)time(0)!=REG_NOMATCH);
     struct game* game=calloc(1,sizeof(struct game));
     game->state=PLAYING;
     game->parser=create_parser();
@@ -66,11 +66,11 @@ void execute_command(struct game* game, struct command* command)
     {
         return;
     }
-    if(regexec(&command->preg,"KONIEC",0,NULL,0)||regexec(&command->preg,"QUIT",0,NULL,0)||regexec(&command->preg,"EXIT",0,NULL,0))
+    if(regexec(&command->preg,"KONIEC",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"QUIT",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"EXIT",0,NULL,0)!=REG_NOMATCH)
     {
         game->state=GAMEOVER;
     }
-    else if(regexec(&command->preg,"SAVER",0,NULL,0)||regexec(&command->preg,"S",0,NULL,0))
+    else if(regexec(&command->preg,"SAVER",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"S",0,NULL,0)!=REG_NOMATCH)
     {
         if(game->current_room->north!=NULL)
         {
@@ -81,7 +81,7 @@ void execute_command(struct game* game, struct command* command)
             printf("Na severe nie je žiadna miestnosť.\n");
         }
     }
-    else if(regexec(&command->preg,"JUH",0,NULL,0)||regexec(&command->preg,"J",0,NULL,0))
+    else if(regexec(&command->preg,"JUH",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"J",0,NULL,0)!=REG_NOMATCH)
     {
         if(game->current_room->south!=NULL)
         {
@@ -92,7 +92,7 @@ void execute_command(struct game* game, struct command* command)
             printf("Na juhu nie je žiadna miestnosť.\n");
         }
     }
-    else if(regexec(&command->preg,"VYCHOD",0,NULL,0)||regexec(&command->preg,"V",0,NULL,0))
+    else if(regexec(&command->preg,"VYCHOD",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"V",0,NULL,0)!=REG_NOMATCH)
     {
         if(game->current_room->east!=NULL)
         {
@@ -100,10 +100,10 @@ void execute_command(struct game* game, struct command* command)
         }
         else
         {
-            printf("Na vÃ½chode nie je žiadna miestnosť.\n");
+            printf("Na východe nie je žiadna miestnosť.\n");
         }
     }
-    else if(regexec(&command->preg,"ZAPAD",0,NULL,0)||regexec(&command->preg,"Z",0,NULL,0))
+    else if(regexec(&command->preg,"ZAPAD",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"Z",0,NULL,0)!=REG_NOMATCH)
     {
         if(game->current_room->west!=NULL)
         {
@@ -114,11 +114,11 @@ void execute_command(struct game* game, struct command* command)
             printf("Na zapade nie je žiadna miestnosť.\n");
         }
     }
-    else if(regexec(&command->preg,"ROZHLIADNI SA",0,NULL,0))
+    else if(regexec(&command->preg,"ROZHLIADNI SA",0,NULL,0)!=REG_NOMATCH)
     {
         show_room(game->current_room);
     }
-    else if(regexec(&command->preg,"PRIKAZY",0,NULL,0)||regexec(&command->preg,"HELP",0,NULL,0)||regexec(&command->preg,"POMOC",0,NULL,0))
+    else if(regexec(&command->preg,"PRIKAZY",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"HELP",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"POMOC",0,NULL,0)!=REG_NOMATCH)
     {
         struct container* ptr1=game->parser->commands;
         while(ptr1!=NULL)
@@ -128,37 +128,37 @@ void execute_command(struct game* game, struct command* command)
         }
         free(ptr1);
     }
-    else if(regexec(&command->preg,"VERZIA",0,NULL,0))
+    else if(regexec(&command->preg,"VERZIA",0,NULL,0)!=REG_NOMATCH)
     {
         printf("Verzia hry: 0.0.1\n Autor:\nmeno: Martin Mormák\ne-mail: martin.mormak@student.tuke.sk\n");
     }
-    else if(regexec(&command->preg,"RESTART",0,NULL,0))
+    else if(regexec(&command->preg,"RESTART",0,NULL,0)!=REG_NOMATCH)
     {
         game->state=RESTART;
     }
-    else if(regexec(&command->preg,"O HRE",0,NULL,0)||regexec(&command->preg,"ABOUT",0,NULL,0))
+    else if(regexec(&command->preg,"O HRE",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"ABOUT",0,NULL,0)!=REG_NOMATCH)
     {
         printf("Kde bolo tam bolo, študenti TUKE dostali na predmete PVJC problemset 5 kde bolo potrebné vytvoriť advanturu.\n");
     }
-    else if(regexec(&command->preg,"VEZMI",0,NULL,0))
+    else if(regexec(&command->preg,"VEZMI",0,NULL,0)!=REG_NOMATCH)
     {
     }
-    else if(regexec(&command->preg,"POLOZ",0,NULL,0))
+    else if(regexec(&command->preg,"POLOZ",0,NULL,0)!=REG_NOMATCH)
     {
     }
-    else if(regexec(&command->preg,"INVENTAR",0,NULL,0)||regexec(&command->preg,"I",0,NULL,0))
+    else if(regexec(&command->preg,"INVENTAR",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"I",0,NULL,0)!=REG_NOMATCH)
     {
     }
-    else if(regexec(&command->preg,"POUZI",0,NULL,0))
+    else if(regexec(&command->preg,"POUZI",0,NULL,0)!=REG_NOMATCH)
     {
     }
-    else if(regexec(&command->preg,"PRESKUMAJ",0,NULL,0))
+    else if(regexec(&command->preg,"PRESKUMAJ",0,NULL,0)!=REG_NOMATCH)
     {
     }
-    else if(regexec(&command->preg,"NAHRAJ",0,NULL,0)||regexec(&command->preg,"LOAD",0,NULL,0))
+    else if(regexec(&command->preg,"NAHRAJ",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"LOAD",0,NULL,0)!=REG_NOMATCH)
     {
     }
-    else if(regexec(&command->preg,"ULOZ",0,NULL,0)||regexec(&command->preg,"SAVE",0,NULL,0))
+    else if(regexec(&command->preg,"ULOZ",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"SAVE",0,NULL,0)!=REG_NOMATCH)
     {
     }
     else
