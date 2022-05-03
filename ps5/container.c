@@ -14,13 +14,13 @@ struct container* create_container(struct container* first, enum container_type 
     {
         return NULL;
     }
-    if(first!=NULL)
+    /*if(first!=NULL)
     {
         if(first->type!=type)
         {
             return NULL;
         }
-    }
+    }*/
     struct container* container=calloc(1,sizeof(struct container));
     container->type=type;
     container->next=NULL;

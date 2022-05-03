@@ -70,7 +70,7 @@ void execute_command(struct game* game, struct command* command)
     {
         game->state=GAMEOVER;
     }
-    else if(regexec(&command->preg,"SAVER",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"S",0,NULL,0)!=REG_NOMATCH)
+    else if(regexec(&command->preg,"SEVER",0,NULL,0)!=REG_NOMATCH||regexec(&command->preg,"S",0,NULL,0)!=REG_NOMATCH)
     {
         if(game->current_room->north!=NULL)
         {
