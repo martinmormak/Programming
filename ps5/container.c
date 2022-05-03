@@ -135,7 +135,7 @@ void* get_from_container_by_name(struct container *first, const char *name)
     {
         if(ptr->type==ROOM)
         {
-            if(ptr->room->name==nam)
+            if(strcmp(ptr->room->name,nam))
             {
                 free(nam);
                 free(inpu);
@@ -144,7 +144,7 @@ void* get_from_container_by_name(struct container *first, const char *name)
         }
         else if(ptr->type==COMMAND)
         {
-            if(ptr->command->name==nam)
+            if(strcmp(ptr->command->name,nam))
             {
                 free(nam);
                 free(inpu);
@@ -153,7 +153,7 @@ void* get_from_container_by_name(struct container *first, const char *name)
         }
         else if(ptr->type==ITEM)
         {
-            if(ptr->item->name==nam)
+            if(strcmp(ptr->item->name,nam))
             {
                 free(nam);
                 free(inpu);
@@ -162,7 +162,7 @@ void* get_from_container_by_name(struct container *first, const char *name)
         }
         else if(ptr->type==TEXT)
         {
-            if(ptr->text==nam)
+            if(strcmp(ptr->text,nam))
             {
                 free(nam);
                 free(inpu);

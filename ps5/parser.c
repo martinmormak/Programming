@@ -9,6 +9,7 @@ struct parser* create_parser()
 {
     struct parser* parser=calloc(1,sizeof(struct parser));
     create_container(parser->commands,COMMAND,create_command("KONIEC", "Príkaz ukončí rozohratú hru. Nastaví príslušný stav hry.", "(KONIEC)", 1));
+    //printf("%s",parser->commands->command->name);
     create_container(parser->commands,COMMAND,create_command("QUIT", "Príkaz ukončí rozohratú hru. Nastaví príslušný stav hry.", "(QUIT)", 1));
     create_container(parser->commands,COMMAND,create_command("EXIT", "Príkaz ukončí rozohratú hru. Nastaví príslušný stav hry.", "(EXIT)", 1));
     create_container(parser->commands,COMMAND,create_command("SEVER", "Presun do miestnosti nachádzajúcej sa na sever od aktuálnej. Zmení referenciu aktuálnej miestnosti.", "(SEVER)", 1));
@@ -94,7 +95,7 @@ struct command* parse_input(struct parser* parser, char* input)
     //printf("%s\n",buf);
     struct container* container=parser->commands;
     //memcpy(container,parser->commands,sizeof(struct container));
-    while(container!=NULL)
+    while(parser->commands!=NULL)
     {
         printf("ahoj\n");
         //regmatch_t groups[container->command->nmatch];
