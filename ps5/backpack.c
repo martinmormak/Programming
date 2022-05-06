@@ -27,7 +27,7 @@ struct backpack* destroy_backpack(struct backpack* backpack)
 
 bool add_item_to_backpack(struct backpack* backpack, struct item* item)
 {
-    if(backpack!=NULL)
+    if(backpack!=NULL && item!=NULL && backpack->capacity<backpack->size && item->properties%2!=0)
     {
         create_container(backpack->items,ITEM,item);
         backpack->size=backpack->size+1;
